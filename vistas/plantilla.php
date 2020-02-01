@@ -1,3 +1,9 @@
+<?php
+$blog = ControladorBlog::ctrMostrarBlog();
+$categorias = ControladorBlog::ctrMostrarCategorias();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +12,25 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Juanito Travel</title>
+	<title><?php echo $blog["titulo"]; ?></title>
+
+	<meta name="title" content="<?php echo $blog["titulo"]; ?>">
+	<meta name="description" content="<?php echo $blog["descripcion"]; ?>">
+
+	<?php
+		$palabras_claves = json_decode($blog["palabras_claves"], true);
+		//echo '<pre class="bg-white">'; echo print_r($palabras_claves); echo '</pre>';
+
+		$p_claves = "";
+
+		foreach ($palabras_claves as $key => $value){
+			$p_claves .= $value.", ";
+		}
+		//substr() -> Función para quitar los espacios de un string
+		$p_claves = substr($p_claves, 0, -2);
+	?>
+
+	<meta name="keywords" content="<?php echo $blog["$p_claves"]; ?>">
 
 	<link rel="icon" href="vistas/img/icono.jpg">
 
@@ -71,7 +95,7 @@
 	/*===============================================
 	Navegador entre páginas
 	===============================================*/
-	include "paginas/articulos.php";
+	include "paginas/inicio.php";
 	
 	
 	/*===============================================
@@ -84,4 +108,5 @@
 
 
 </body>
+
 </html>
