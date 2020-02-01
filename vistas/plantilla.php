@@ -93,9 +93,27 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
 	include "paginas/modulos/menu.php";
 
 	/*===============================================
-	Navegador entre páginas
+	Navegar entre páginas
 	===============================================*/
-	include "paginas/inicio.php";
+	if(isset($_GET["pagina"])){
+
+		foreach($categorias as $key => $value){
+
+			if($_GET["pagina"] == $value["ruta_categoria"]){
+
+				include "paginas/categorias.php";		
+
+			}else{
+
+				include "paginas/404.php";
+				
+				break;
+
+			}
+		}
+	}else{
+		include "paginas/inicio.php";
+	}
 	
 	
 	/*===============================================
