@@ -26,13 +26,13 @@ Class ControladorBlog{
     /*===============================================
     Mostrar articulos y categorías con inner join
     ===============================================*/
-    static public function ctrMostrarConInnerJoin($desde, $cantidad){
+    static public function ctrMostrarConInnerJoin($desde, $cantidad, $item, $valor){
 
         $tabla1 = "categoria";
 
         $tabla2 = "articulos";
 
-        $respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1, $tabla2, $desde, $cantidad);
+        $respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1, $tabla2, $desde, $cantidad, $item, $valor);
 
         return $respuesta;
     }

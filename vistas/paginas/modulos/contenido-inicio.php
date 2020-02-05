@@ -23,9 +23,10 @@ CONTENIDO INICIO
 			<!-- COLUMNA IZQUIERDA -->
 
 			<div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
+
 				<?php foreach($articulos as $key => $value): ?>
 					
-					<!-- ARTÍCULO 01 -->
+					<!-- ARTÍCULOS -->
 
 					<div class="row">
 						
@@ -48,7 +49,6 @@ CONTENIDO INICIO
 							<div class="fecha"><?php echo $value["fecha_articulo"]; ?></div>
 
 						</div>
-
 
 					</div>
 
