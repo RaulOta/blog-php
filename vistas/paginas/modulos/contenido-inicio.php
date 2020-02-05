@@ -11,207 +11,42 @@ CONTENIDO INICIO
 			<!-- COLUMNA IZQUIERDA -->
 
 			<div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
+				<?php foreach($articulos as $key => $value): ?>
+					
+					<!-- ARTÍCULO 01 -->
+
+					<div class="row">
+						
+						<div class="col-12 col-lg-5">
+
+							<a href="<?php echo $value["ruta_articulo"]; ?>"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo_articulo"]; ?></h5></a>
 				
-				<!-- ARTÍCULO 01 -->
+							<a href="<?php echo $value["ruta_articulo"]; ?>"><img src="<?php echo $value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid" width="100%"></a>
 
-				<div class="row">
-					
-					<div class="col-12 col-lg-5">
+						</div>
 
-						<a href="articulos.html"><h5 class="d-block d-lg-none py-3">Type something here</h5></a>
-			
-						<a href="articulos.html"><img src="vistas/img/articulo01.png" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<div class="col-12 col-lg-7 introArticulo">
+							
+							<a href="<?php echo $value["ruta_articulo"]; ?>"><h4 class="d-none d-lg-block"><?php echo $value["titulo_articulo"]; ?></h4></a>
+							
+							<p class="my-2 my-lg-5"><?php echo $value["descripcion_articulo"]; ?></p>
+
+							<a href="<?php echo $value["ruta_articulo"]; ?>" class="float-right"><?php echo $value["ruta_articulo"]; ?></a>
+
+							<div class="fecha"><?php echo $value["fecha_articulo"]; ?></div>
+
+						</div>
+
 
 					</div>
 
-					<div class="col-12 col-lg-7 introArticulo">
-						
-						<a href="articulos.html"><h4 class="d-none d-lg-block">Type something here</h4></a>
-						
-						<p class="my-2 my-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, minus magni ipsam nisi accusantium ipsa! Incidunt neque ad, iure omnis saepe est.</p>
+					<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 
-						<a href="articulos.html" class="float-right">Leer Más</a>
-
-						<div class="fecha">30.09.2018</div>
-
-					</div>
-
-
-				</div>
-
-				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
-
-				<!-- ARTÍCULO 02 -->
-
-				<div class="row">
-					
-					<div class="col-12 col-lg-5">
-
-						<a href="articulos.html">
-
-							<h5 class="d-block d-lg-none py-3">Type something here</h5>
-
-						</a>
-			
-						<a href="articulos.html">
-
-							<img src="vistas/img/articulo02.png" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%">
-
-						</a>
-
-					</div>
-
-					<div class="col-12 col-lg-7 introArticulo">
-						
-						<a href="articulos.html">
-
-							<h4 class="d-none d-lg-block">Type something here</h4>
-
-						</a>
-						
-						<p class="my-2 my-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, minus magni ipsam nisi accusantium ipsa! Incidunt neque ad, iure omnis saepe est.</p>
-
-						<a href="articulos.html" class="float-right">Leer Más</a>
-
-						<div class="fecha">30.09.2018</div>
-
-					</div>
-
-				</div>
-
-				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
-
-				<!-- PUBLICIDAD -->
-
-				<div class="d-block d-lg-none">
-					
-					<img src="vistas/img/ad02.jpg" class="img-fluid" width="100%">
-
-				</div>
-
-				<!-- ARTÍCULO 03 -->
-
-				<div class="row">
-					
-					<div class="col-12 col-lg-5">
-
-						<a href="articulos.html">
-
-							<h5 class="d-block d-lg-none py-3">Type something here</h5>
-
-						</a>
-			
-						<a href="articulos.html">
-
-							<img src="vistas/img/articulo03.png" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%">
-
-						</a>
-
-					</div>
-
-					<div class="col-12 col-lg-7 introArticulo">
-						
-						<a href="articulos.html">
-
-							<h4 class="d-none d-lg-block">Type something here</h4>
-
-						</a>
-						
-						<p class="my-2 my-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, minus magni ipsam nisi accusantium ipsa! Incidunt neque ad, iure omnis saepe est.</p>
-
-						<a href="articulos.html" class="float-right">Leer Más</a>
-
-						<div class="fecha">30.09.2018</div>
-
-					</div>
-
-				</div>
-
-				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
-
-				<!-- ARTÍCULO 04 -->
-
-				<div class="row">
-					
-					<div class="col-12 col-lg-5">
-
-						<a href="articulos.html">
-
-							<h5 class="d-block d-lg-none py-3">Type something here</h5>
-
-						</a>
-			
-						<a href="articulos.html">
-
-							<img src="vistas/img/articulo04.png" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%">
-
-						</a>
-
-					</div>
-
-					<div class="col-12 col-lg-7 introArticulo">
-						
-						<a href="articulos.html">
-
-							<h4 class="d-none d-lg-block">Type something here</h4>
-
-						</a>
-						
-						<p class="my-2 my-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, minus magni ipsam nisi accusantium ipsa! Incidunt neque ad, iure omnis saepe est.</p>
-
-						<a href="articulos.html" class="float-right">Leer Más</a>
-
-						<div class="fecha">30.09.2018</div>
-
-					</div>
-
-				</div>
-
-				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
-
-				<!-- ARTÍCULO 05 -->
-
-				<div class="row">
-					
-					<div class="col-12 col-lg-5">
-
-						<a href="articulos.html">
-
-							<h5 class="d-block d-lg-none py-3">Type something here</h5>
-
-						</a>
-			
-						<a href="articulos.html">
-
-							<img src="vistas/img/articulo05.png" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%">
-
-						</a>
-
-					</div>
-
-					<div class="col-12 col-lg-7 introArticulo">
-						
-						<a href="articulos.html">
-
-							<h4 class="d-none d-lg-block">Type something here</h4>
-
-						</a>
-						
-						<p class="my-2 my-lg-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, minus magni ipsam nisi accusantium ipsa! Incidunt neque ad, iure omnis saepe est.</p>
-
-						<a href="articulos.html" class="float-right">Leer Más</a>
-
-						<div class="fecha">30.09.2018</div>
-
-					</div>
-
-				</div>
-
-				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
+				<?php endforeach ?>
 
 				<div class="container d-none d-md-block">
 					
-					<ul class="pagination justify-content-center"></ul>
+					<ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>"></ul>
 
 				</div>
 

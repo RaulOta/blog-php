@@ -94,8 +94,10 @@ $(".grid figure, .gridFooter figure").click(function(){
 PAGINACIÓN
 =============================================*/
 
+var totalPaginas = Number($(".pagination").attr("totalPaginas"));
+
 $(".pagination").twbsPagination({
-	totalPages: 10,
+	totalPages: totalPaginas,
 	visiblePages: 4,
 	first: "Primero",
 	last: "Último",
