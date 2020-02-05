@@ -94,17 +94,31 @@ $(".grid figure, .gridFooter figure").click(function(){
 PAGINACIÓN
 =============================================*/
 
+//Se asigna el valor a una variable el valor mandado desde el html para poder ser usado en JS, utilizando
+//la función Number para convertir el valor de la variable string a entero (.pagination -> nombre de la clase/evento)
 var totalPaginas = Number($(".pagination").attr("totalPaginas"));
 
+var rutaActual = $("#rutaActual").val(); //Se esta capturando el valor que se esta registrando en el input oculdo en la plantilla para traer la dirección actual
+
+var paginaActual = Number($(".pagination").attr("paginaActual"));
+
+//startPage -> El número que se quiere pintar en la númeración
 $(".pagination").twbsPagination({
 	totalPages: totalPaginas,
+	startPage: paginaActual,
 	visiblePages: 4,
 	first: "Primero",
 	last: "Último",
 	prev: '<i class="fas fa-angle-left"></i>',
 	next: '<i class="fas fa-angle-right"></i>'
 
-});
+}).on("page", function(evt, page){
+	//console.log("evt", page);
+	//console.log("page", page);
+	window.location = rutaActual+page;
+})
+
+//funcion on para mostrar el evento que tiene el plugin con los parametros "evt" y "page" 
 
 
 /*=============================================

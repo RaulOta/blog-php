@@ -38,11 +38,11 @@ Class ModeloBlog{
     Mostrar articulos y categorías con inner join
     ===========================================*/
 
-    static public function mdlMostrarConInnerJoin($tabla1, $tabla2,$cantidad){
+    static public function mdlMostrarConInnerJoin($tabla1, $tabla2, $desde, $cantidad){
 
         $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.*, DATE_FORMAT(fecha_articulo, 
         '%d.%m.%Y') AS fecha_articulo FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_categoria = 
-        $tabla2.id_cat ORDER BY $tabla2.id_articulo DESC LIMIT $cantidad");
+        $tabla2.id_cat ORDER BY $tabla2.id_articulo DESC LIMIT $desde, $cantidad");
 
         $stmt -> execute();
 

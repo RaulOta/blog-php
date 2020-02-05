@@ -1,7 +1,7 @@
 <?php
 $blog = ControladorBlog::ctrMostrarBlog();
 $categorias = ControladorBlog::ctrMostrarCategorias();
-$articulos = ControladorBlog::ctrMostrarConInnerJoin(5);
+$articulos = ControladorBlog::ctrMostrarConInnerJoin(0, 5);
 $totalArticulos = ControladorBlog::ctrMostrarTotalArticulos();
 $totalPaginas = ceil(count($totalArticulos)/5);
 
@@ -154,13 +154,23 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 	if(isset($_GET["pagina"])){
 
-		foreach($categorias as $key => $value){
+		if(is_numeric($_GET["pagina"])){
 
-			if($_GET["pagina"] == $value["ruta_categoria"]){
+			$desde = ($_GET["pagina"] - 1)*5;
 
-				$validarRuta = "categorias";
-			break;
+			$cantidad = 5;
 
+			$articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad);
+
+		}else{
+			foreach($categorias as $key => $value){
+
+				if($_GET["pagina"] == $value["ruta_categoria"]){
+	
+					$validarRuta = "categorias";
+				break;
+	
+				}
 			}
 		}
 
@@ -170,6 +180,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 		if($validarRuta == "categorias"){
 
 			include "paginas/categorias.php";
+
+		}else if(is_numeric($_GET["pagina"])){
+
+			include "paginas/inicio.php";	
 
 		}else{
 
@@ -189,6 +203,8 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 	===============================================*/
 	include "paginas/modulos/fooder.php";
 ?>
+
+<input type="hidden" id="rutaActual" value="<?php $blog["dominio"]; ?>">
 
 <script src="vistas/js/script.js"></script>
 
