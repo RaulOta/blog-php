@@ -102,21 +102,36 @@ var rutaActual = $("#rutaActual").val(); //Se esta capturando el valor que se es
 
 var paginaActual = Number($(".pagination").attr("paginaActual"));
 
-//startPage -> El número que se quiere pintar en la númeración
-$(".pagination").twbsPagination({
-	totalPages: totalPaginas,
-	startPage: paginaActual,
-	visiblePages: 4,
-	first: "Primero",
-	last: "Último",
-	prev: '<i class="fas fa-angle-left"></i>',
-	next: '<i class="fas fa-angle-right"></i>'
+var rutaPagina = $(".pagination").attr("rutaPagina"); //Variable que capture la ruta de la página
 
-}).on("page", function(evt, page){
-	//console.log("evt", page);
-	//console.log("page", page);
-	window.location = rutaActual+page;
-})
+if($(".pagination").length != 0){
+
+	//startPage -> El número que se quiere pintar en la númeración
+	$(".pagination").twbsPagination({
+		totalPages: totalPaginas,
+		startPage: paginaActual,
+		visiblePages: 4,
+		first: "Primero",
+		last: "Último",
+		prev: '<i class="fas fa-angle-left"></i>',
+		next: '<i class="fas fa-angle-right"></i>'
+
+	}).on("page", function(evt, page){
+		
+		if(rutaPagina != ""){
+
+			window.location = rutaActual+rutaPagina+"/"+page;	
+
+		}else{
+
+			//console.log("evt", page);
+			//console.log("page", page);
+			window.location = rutaActual+page;
+
+		}
+	})
+
+}
 
 //funcion on para mostrar el evento que tiene el plugin con los parametros "evt" y "page" 
 

@@ -73,13 +73,26 @@ Class ModeloBlog{
     Mostrar total de articulos
     ===========================================*/
 
-    static public function mdlMostrarTotalArticulos($tabla1){
+    static public function mdlMostrarTotalArticulos($tabla, $item, $valor){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1");
+        if($item == null && $valor == null){
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 
-        $stmt -> execute();
+            $stmt -> execute();
+    
+            return $stmt -> fetchAll();
 
-        return $stmt -> fetchAll();
+        }else{
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+            $stmt -> execute();
+    
+            return $stmt -> fetchAll();
+
+        }
+
 
         $stmt -> close();
 
