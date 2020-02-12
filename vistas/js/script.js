@@ -150,7 +150,6 @@ $.scrollUp({
 DESLIZADOR DE ARTÍCULOS
 =============================================*/
 
-
 $(".deslizadorArticulos").jdSlider({
 	wrap: ".slide-inner",
 	slideShow: 3,
@@ -166,5 +165,11 @@ $(".deslizadorArticulos").jdSlider({
 	}]
 
 })
+
+/*=============================================
+COMPARTIR ARTÍCULOS
+=============================================*/
+
+$('.social-share').shapeShare();
 
 

@@ -68,13 +68,13 @@ CONTENIDO ARTÍCULO
 						
 						<div class="btn-group text-secondary">
 
-							Si te gusto compartelo:
+							Si te gustó compártelo:
 
 						</div>
 						
 						<div class="btn-group">
 							
-							<button type="button" class="btn border-0 text-white" style="background: #1475E0">
+							<button type="button" class="btn border-0 text-white social-share" style="background: #1475E0" data-share="facebook">
 								
 								<span class="fab fa-facebook pr-1"></span>
 
@@ -86,7 +86,7 @@ CONTENIDO ARTÍCULO
 
 						<div class="btn-group">
 							
-							<button type="button" class="btn border-0 text-white" style="background: #00A6FF">
+							<button type="button" class="btn border-0 text-white social-share" style="background: #00A6FF" data-share="twitter">
 								
 								<span class="fab fa-twitter pr-1"></span>
 
