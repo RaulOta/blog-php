@@ -15,6 +15,17 @@ Revisar si viene paginación de categorias
 ============================================*/
 if(isset($rutas[1]) && is_numeric($rutas[1])){
 
+	if ($rutas[1] > $totalPaginas) {
+
+		echo '<script>
+
+			window.location = "'.$blog["dominio"].'error";
+
+		</script>';
+
+		return;
+	}
+
 	$paginaActual = $rutas[1];
 	
 	$desde = ($rutas[1] - 1)*5;
@@ -42,9 +53,9 @@ CONTENIDO CATEGORIA
 
 		<ul class="breadcrumb bg-white p-0 mb-2 mb-md-4">
 
-			<li class="breadcrumb-item inicio"><a href="index.html">Inicio</a></li>
+			<li class="breadcrumb-item inicio"><a href="<?php echo $blog["dominio"]; ?>">Inicio</a></li>
 
-			<li class="breadcrumb-item active">Mi viaje por Suramérica</li>
+			<li class="breadcrumb-item active"><?php echo $articulos[0]["descripcion_categoria"]; ?></li>
 
 		</ul>
 		
@@ -106,7 +117,17 @@ CONTENIDO CATEGORIA
 				<div>
 
 					<h4>Etiquetas</h4>
+					<?php 
 
+						$tags = json_decode($articulos[0]["p_claves_categoria"],true);
+
+					?>
+
+					<?php foreach ($tags as $key => $value): ?>
+
+						<a href="#<?php echo $value; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
+
+					<?php endforeach ?>
 
 						<a href="#suramerica" class="btn btn-secondary btn-sm m-1">suramerica</a> 				
 					

@@ -183,9 +183,13 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 			include "paginas/categorias.php";
 
-		}else if(is_numeric($rutas["0"]) && $rutas["0"] <= $totalPaginas || is_numeric($rutas["1"])){
+		}else if(is_numeric($rutas["0"]) && $rutas["0"] <= $totalPaginas){
 
 			include "paginas/inicio.php";	
+
+		}else if(isset($rutas[1]) && is_numeric($rutas[1])){
+
+			include "paginas/404.php";
 
 		}else{
 
