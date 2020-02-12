@@ -164,9 +164,9 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 		$rutas = explode("/", $_GET["pagina"]);
 
-		if(is_numeric($rutas["0"])){
+		if(is_numeric($rutas[0])){
 
-			$desde = ($rutas["0"] - 1)*5;
+			$desde = ($rutas[0] - 1)*5;
 
 			$cantidad = 5;
 
@@ -175,7 +175,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 		}else{
 			foreach($categorias as $key => $value){
 
-				if($rutas["0"] == $value["ruta_categoria"]){
+				if($rutas[0] == $value["ruta_categoria"]){
 	
 					$validarRuta = "categorias";
 				break;
@@ -185,13 +185,45 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 		}
 
 		/*===============================================
+		Indice 1: Rutas de Artículos o Paginación de categorias
+		===============================================*/		
+		if (isset($rutas[1])){
+
+			if (is_numeric($rutas[1])){
+
+				$desde = ($rutas[1] - 1)*5;
+	
+				$cantidad = 5;
+	
+				$articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, null, null);
+	
+			}else{
+				foreach($totalArticulos as $key => $value){
+	
+					if($rutas[1] == $value["ruta_articulo"]){
+		
+						$validarRuta = "articulos";
+						
+						break;
+		
+					}
+				}
+			}
+			
+		}
+
+		/*===============================================
 		Validar las rutas
 		===============================================*/
 		if($validarRuta == "categorias"){
 
 			include "paginas/categorias.php";
 
-		}else if(is_numeric($rutas["0"]) && $rutas["0"] <= $totalPaginas){
+		}else if($validarRuta == "articulos"){
+
+			include "paginas/articulos.php";
+
+		}else if(is_numeric($rutas[0]) && $rutas[0] <= $totalPaginas){
 
 			include "paginas/inicio.php";	
 
