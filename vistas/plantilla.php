@@ -33,6 +33,22 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 				}	
 			}
+
+			if (isset($rutas[1])){
+				
+				foreach($totalArticulos as $key => $value){
+
+					if( !is_numeric($rutas[1]) && $rutas[1] == $value["ruta_articulo"] ){
+	
+						$validarRuta = "articulos";
+	
+						break;
+	
+					}	
+				}
+
+			}
+
 			if($validarRuta == "categorias"){
 
 				echo '<title>'.$blog["titulo"].' | '.$value["descripcion_categoria"].' </title>
@@ -41,6 +57,26 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 						<meta name="description" content="'.$value["descripcion_categoria"].'">';
 	
 						$palabras_claves = json_decode($value["p_claves_categoria"], true);
+						//echo '<pre class="bg-white">'; echo print_r($palabras_claves); echo '</pre>';
+				
+						$p_claves = "";
+				
+						foreach ($palabras_claves as $key => $value){
+							$p_claves .= $value.", ";
+						}
+						//substr() -> Función para quitar los espacios de un string
+						$p_claves = substr($p_claves, 0, -2);
+	
+						echo '<meta name="keywords" content="'.$p_claves.'">';
+
+			}else if($validarRuta == "articulos"){
+
+				echo '<title>'.$blog["titulo"].' | '.$value["titulo_articulo"].' </title>
+
+						<meta name="title" content="'.$value["titulo_articulo"].'">
+						<meta name="description" content="'.$value["descripcion_articulo"].'">';
+	
+						$palabras_claves = json_decode($value["p_claves_articulo"], true);
 						//echo '<pre class="bg-white">'; echo print_r($palabras_claves); echo '</pre>';
 				
 						$p_claves = "";

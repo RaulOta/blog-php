@@ -141,29 +141,7 @@ CONTENIDO CATEGORIA
 
 						<a href="#<?php echo $value; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
 
-					<?php endforeach ?>
-
-						<a href="#suramerica" class="btn btn-secondary btn-sm m-1">suramerica</a> 				
-					
-						<a href="#colombia" class="btn btn-secondary btn-sm m-1">colombia</a> 					
-					
-						<a href="#peru" class="btn btn-secondary btn-sm m-1">peru</a> 					
-					
-						<a href="#argentina" class="btn btn-secondary btn-sm m-1">argentina</a> 					
-					
-						<a href="#chile" class="btn btn-secondary btn-sm m-1">chile</a> 					
-					
-						<a href="#brasil" class="btn btn-secondary btn-sm m-1">brasil</a> 					
-					
-						<a href="#ecuador" class="btn btn-secondary btn-sm m-1">ecuador</a> 						
-					
-						<a href="#venezuela" class="btn btn-secondary btn-sm m-1">venezuela</a> 
-											
-						<a href="#paraguay" class="btn btn-secondary btn-sm m-1">paraguay</a> 						
-					
-						<a href="#uruguay" class="btn btn-secondary btn-sm m-1">uruguay</a> 						
-					
-						<a href="#bolivia" class="btn btn-secondary btn-sm m-1">bolivia</a> 					
+					<?php endforeach ?>					
 										
 				</div>	
 
