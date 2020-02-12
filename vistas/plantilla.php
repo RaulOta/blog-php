@@ -16,13 +16,21 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<?php
+
 	$validarRuta = "";
+
 		if(isset($_GET["pagina"])){
 
+			$rutas = explode("/", $_GET["pagina"]);
+
 			foreach($categorias as $key => $value){
-				if($_GET["pagina"] == $value["ruta_categoria"]){
+
+				if( !is_numeric($rutas[0]) && $rutas[0] == $value["ruta_categoria"] ){
+
 					$validarRuta = "categorias";
-				break;
+
+					break;
+
 				}	
 			}
 			if($validarRuta == "categorias"){
@@ -205,7 +213,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 	
 	
 	/*===============================================
-	Navegador entre páginas
+	Módulos fijos inferiores
 	===============================================*/
 	include "paginas/modulos/fooder.php";
 ?>
