@@ -277,8 +277,9 @@ CONTENIDO ARTÍCULO
 
 					<!-- FORMULARIO DE OPINIONES -->
 					
-					<form>
+					<form method="post">
 						
+						<input type="hidden" name="id_art" value="<?php echo $articulo[0]["id_articulo"]; ?>">
 						<label class="text-muted lead">¿Qué tal te pareció el artículo?</label>
 
 						<div class="row">
@@ -287,9 +288,9 @@ CONTENIDO ARTÍCULO
 								
 								<div class="input-group-lg">
 									
-									<input type="text" class="form-control my-3" placeholder="Tu nombre">
+									<input type="text" class="form-control my-3" placeholder="Tu nombre" name="nombre_opinion" required>
 
-									<input type="email" class="form-control my-3" placeholder="Tu email">
+									<input type="email" class="form-control my-3" placeholder="Tu email" name="correo_opinion" required>
 
 								</div>
 
@@ -303,9 +304,14 @@ CONTENIDO ARTÍCULO
 
 						</div>	
 
-						<textarea class="form-control my-3" rows="7" placeholder="Escribe aquí tu mensaje"></textarea>
+						<textarea class="form-control my-3" rows="7" placeholder="Escribe aquí tu mensaje" name="contenido_opinion" required></textarea>
 						
 						<input type="submit" class="btn btn-dark btn-lg btn-block" value="Enviar">
+
+						<?php
+							$enviarOpinion = ControladorBlog::ctrEnviarOpinion();
+							echo '<pre class="bg-white">'; echo print_r($enviarOpinion); echo '</pre>';
+						?>
 
 					</form>
 
