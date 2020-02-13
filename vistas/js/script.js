@@ -169,7 +169,16 @@ $(".deslizadorArticulos").jdSlider({
 /*=============================================
 COMPARTIR ARTÍCULOS
 =============================================*/
-
 $('.social-share').shapeShare();
+
+
+/*=============================================
+APROVACIONES VACÍAS
+=============================================*/
+if(document.querySelector(".opiniones").childNodes.length == 1){
+	$(".opiniones").html(`
+		<p class="pl-3 text-secondary">¡Este artículo no tiene opiniones!</p>
+	`)
+}
 
 
