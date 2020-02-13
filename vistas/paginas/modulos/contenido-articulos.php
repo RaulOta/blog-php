@@ -3,6 +3,7 @@
 if (isset($rutas[1])){
 	
 	$articulo = ControladorBlog::ctrMostrarConInnerJoin(0, 1, "ruta_articulo", $rutas[1]);
+	$totalArticulos = ControladorBlog::ctrMostrarTotalArticulos("id_cat", $articulo[0]["id_cat"]);
 
 }
 
@@ -98,8 +99,6 @@ CONTENIDO ARTÍCULO
 
 					</div>
 
-					<!-- AVANZAR - RETROCEDER -->
-
 					<div class="clearfix"></div>
 
 					<!-- ETIQUETAS -->
@@ -122,11 +121,34 @@ CONTENIDO ARTÍCULO
 																		
 					</div>
 
+					<!-- AVANZAR - RETROCEDER -->
+
+					<?php
+
+						foreach ($totalArticulos as $key => $value){
+
+							if ($articulo[0]["id_articulo"] == $value["id_articulo"]) {
+
+								$posicion = $key;
+							}
+
+						}
+
+					?>
+
 				 	<div class="d-md-flex justify-content-between my-3 d-none">
 					    
-					    <a href="articulos.html">Leer artículo anterior</a>
-					    
-					    <a href="articulos.html">Leer artículo siguiente</a>
+					    <?php if(($posicion-1 > 0)): ?>
+						
+						<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$totalArticulos[$posicion-1]["ruta_articulo"] ?>">Leer artículo anterior</a>
+						
+						<?php endif ?>
+						
+						<?php if(($posicion+1) < count($totalArticulos)): ?>
+						
+						<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$totalArticulos[$posicion+1]["ruta_articulo"] ?>">Leer artículo siguiente</a>
+						
+						<?php endif ?>
 
 				  	</div>
 
