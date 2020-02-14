@@ -174,6 +174,9 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 	<!-- https://www.jqueryscript.net/slider/Carousel-Slideshow-jdSlider.html -->
 	<link rel="stylesheet" href="<?php echo $blog["dominio"];?>vistas/css/plugins/jquery.jdSlider.css">
 
+	<!-- Alertas Notie -->
+	<link rel="stylesheet" href="<?php echo $blog["dominio"];?>vistas/css/plugins/notie.min.css">
+
 	<link rel="stylesheet" href="<?php echo $blog["dominio"];?>vistas/css/style.css">
 
 	<!--=====================================
@@ -207,6 +210,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 	<!-- https://www.jqueryscript.net/social-media/
 	Social-Share-Plugin-jQuery-Open-Graph-Shape-Share.html -->
 	<script src="<?php echo $blog["dominio"];?>vistas/js/plugins/shape.share.js"></script>
+
+	<!-- Alertas Notie -->
+	<!-- https://github.com/jaredreich/notice -->
+	<script src="<?php echo $blog["dominio"];?>vistas/js/plugins/notie.min.js"></script>
 
 </head>
 

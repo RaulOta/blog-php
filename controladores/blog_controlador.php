@@ -80,8 +80,6 @@ Class ControladorBlog{
 
                 if (isset($_FILES["fotoOpinion"]["tmp_name"]) && !empty($_FILES["fotoOpinion"]["tmp_name"])){
 
-                    echo '<pre class="bg-white">'; echo "Si entro al IF 1"; echo '</pre>';
-
                     /*===============================================
                     CAPTURAR ANCHO Y ALTO ORIGINAL DE LA IMAGEN Y DEFINIR LOS NUEVOS VALORES
                     ===============================================*/
