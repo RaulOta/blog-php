@@ -181,4 +181,62 @@ if(document.querySelector(".opiniones").childNodes.length == 1){
 	`)
 }
 
+/*=============================================
+SUBIR FOTO TEMPORAL DE OPINIÓN, lado del cliente
+=============================================*/
+$("#fotoOpinion").change(function(){
+
+	$(".alert").remove();
+	
+	var imagen = this.files[0];
+	
+	/*=============================================
+	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+	=============================================*/
+	if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
+
+		$("#fotoOpinion").val("");
+
+		$("$fotoOpinion").after(`
+
+			<div class="aler alert-danger">¡La imagen debe estar en formato JPG o PNG!</div>	
+
+		`)
+
+		return;
+		
+	}else
+	/*=============================================
+	VALIDAMOS EL TAMAÑO DE LA IMAGEN SEA MENOR DE 2 MB -> 2000 KB -> 2000000 BYTES
+	=============================================*/
+	 if(imagen["size"] > 2000000){
+
+		$("#fotoOpinion").val("");
+
+		$("$fotoOpinion").after(`
+
+			<div class="aler alert-danger">¡La imagen no debe pesar más de 2MB!</div>	
+
+		`)
+
+		return;
+
+	}else{
+		/*=============================================
+		CONVERSION DEL ARCHIVO TEMPORAL EN CÓDGIO DE BASE 64
+		=============================================*/
+
+		var datosImagen = new FileReader;
+		datosImagen.readAsDataURL(imagen);
+		$(datosImagen).on("load", function(event){
+
+			var rutaImagen = event.target.result;
+
+			$(".prevFotoOpinion").attr("src", rutaImagen);
+
+		})
+	}
+
+
+})
 

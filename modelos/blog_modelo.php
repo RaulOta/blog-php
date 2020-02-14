@@ -124,8 +124,8 @@ Class ModeloBlog{
     ===========================================*/
     static public function mdlEnviarOpinion($tabla, $datos){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_art, nombre_opinion, correo_opinion, foto_opinion, contenido_opinion, fecha_opinion) 
-        VALUES(:id_art, :nombre_opinion, :correo_opinion, :foto_opinion, :contenido_opinion, :fecha_opinion)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_art, nombre_opinion, correo_opinion, foto_opinion, contenido_opinion, fecha_opinion, id_adm) 
+        VALUES(:id_art, :nombre_opinion, :correo_opinion, :foto_opinion, :contenido_opinion, :fecha_opinion, :id_adm)");
         
         $stmt -> bindParam(":id_art", $datos["id_art"], PDO::PARAM_STR);
         $stmt -> bindParam(":nombre_opinion", $datos["nombre_opinion"], PDO::PARAM_STR);
@@ -133,6 +133,7 @@ Class ModeloBlog{
         $stmt -> bindParam(":foto_opinion", $datos["foto_opinion"], PDO::PARAM_STR);
         $stmt -> bindParam(":contenido_opinion", $datos["contenido_opinion"], PDO::PARAM_STR);
         $stmt -> bindParam(":fecha_opinion", $datos["fecha_opinion"], PDO::PARAM_STR);
+        $stmt -> bindParam(":id_adm", $datos["id_adm"], PDO::PARAM_STR);
 
         if ($stmt -> execute()) {
             

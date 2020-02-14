@@ -69,13 +69,88 @@ Class ControladorBlog{
 
         if (isset($_POST["nombre_opinion"])){
             
-            if (preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["nombre_opinion"]) && preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["correo_opinion"]) && preg_match('/^[=\\$\\;\\*\\"\\?\\¿\\!\\¡\\:\\.\\,\\0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["contenido_opinion"])){
+            if (preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["nombre_opinion"]) && 
+            preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["correo_opinion"]) && 
+            preg_match('/^[=\\$\\;\\*\\"\\?\\¿\\!\\¡\\:\\.\\,\\0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["contenido_opinion"])){
+
+                /*===============================================
+                VALIDACIÓN FOTO LADO SERVIDOR
+                NOTA: ¡IMPORTANTE! -> Verificar que el usario con el que se esta trabajado cuente con todos los permisos en la carpeta en donde se subiran las imágenes nuevas
+                ===============================================*/
+
+                if (isset($_FILES["fotoOpinion"]["tmp_name"]) && !empty($_FILES["fotoOpinion"]["tmp_name"])){
+
+                    echo '<pre class="bg-white">'; echo "Si entro al IF 1"; echo '</pre>';
+
+                    /*===============================================
+                    CAPTURAR ANCHO Y ALTO ORIGINAL DE LA IMAGEN Y DEFINIR LOS NUEVOS VALORES
+                    ===============================================*/
+                    
+                    list($ancho, $alto) = getimagesize($_FILES["fotoOpinion"]["tmp_name"]);
+
+                    $nuevoAncho = 128;
+                    $nuevoAlto = 128;
+
+                    /*===============================================
+                    CREACIÓN DEL DIRECTORIO EN DONDE SE VA A GUARDAR LA FOTO DEL USUARIO
+                    ===============================================*/
+
+                    $directorio = "vistas/img/usuarios/";
+
+                    /*===============================================
+                    DE ACUERDO AL TIPO DE IMAGEN SE APLIACAN LAS FUNCIONES POR DEFECTO DE PHP
+                    ===============================================*/
+
+                    if ($_FILES["fotoOpinion"]["type"] == "image/jpeg") {
+
+                        $aleatorio = mt_rand(100, 9999);
+                        
+                        $ruta = $directorio.$aleatorio.".jpg";
+
+                        $origen = imagecreatefromjpeg($_FILES["fotoOpinion"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagejpeg($destino, $ruta);
+                        
+                    }else if ($_FILES["fotoOpinion"]["type"] == "image/png") {
+                        
+                        $aleatorio = mt_rand(100, 9999);
+                        
+                        $ruta = $directorio.$aleatorio.".png";
+                        
+                        $origen = imagecreatefrompng($_FILES["fotoOpinion"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagealphablending($destino, FALSE);
+
+                        imagesavealpha($destino, TRUE);
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagepng($destino, $ruta);
+                        
+                    }else{
+
+                        return "error-formato";
+
+                    }
+
+                }else{
+
+                    $ruta = "vistas/img/usuarios/default.png";
+
+                }                
                 
                 $tabla = "opiniones";
+
                 $datos = array("id_art" => $_POST["id_art"],
                                 "nombre_opinion" => $_POST["nombre_opinion"],
                                 "correo_opinion" => $_POST["correo_opinion"],
-                                "foto_opinion" => "vistas/img/usuarios/default.png",
+                                "foto_opinion" => $ruta,
                                 "contenido_opinion" => $_POST["contenido_opinion"],
                                 "fecha_opinion" => date('Y-m-d'),
                                 "id_adm" => 1
