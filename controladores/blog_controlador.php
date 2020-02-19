@@ -15,10 +15,10 @@ Class ControladorBlog{
     /*===============================================
     Mostrar categorias
     ===============================================*/
-    static public function ctrMostrarCategorias(){
+    static public function ctrMostrarCategorias($item, $valor){
 
         $tabla = "categoria";
-        $respuesta = ModeloBlog::mdlMostrarCategorias($tabla);
+        $respuesta = ModeloBlog::mdlMostrarCategorias($tabla, $item, $valor);
         return $respuesta;
 
     }
@@ -165,6 +165,35 @@ Class ControladorBlog{
             }
 
         }
+
+    }
+
+    /*===============================================
+    Actualizar vista articulo
+    ===============================================*/
+    static public function ctrActualizarVista($ruta){
+
+        $articulo = ControladorBlog::ctrMostrarConInnerJoin(0, 1, "ruta_articulo", $ruta);
+
+        $valor = $articulo[0]["vistas_articulo"] + 1;
+
+        $tabla = "articulos";
+
+        $respuesta = ModeloBlog::mdlActualizarVista($tabla, $valor, $ruta);
+
+    }
+
+    /*===============================================
+    Articulos Destacados
+    ===============================================*/
+
+    static public function ctrArticulosDestacados($item, $valor){
+
+        $tabla = "articulos";
+
+        $respuesta = ModeloBlog::mdlArticulosDestacados($tabla, $item, $valor);
+
+        return $respuesta;
 
     }
 }

@@ -6,6 +6,8 @@ if (isset($rutas[1])){
 	$totalArticulos = ControladorBlog::ctrMostrarTotalArticulos("id_cat", $articulo[0]["id_cat"]);
 	$opiniones = ControladorBlog::ctrMostrarOpiniones("id_art", $articulo[0]["id_articulo"]);
 
+	$actualizarVistaArticulo = ControladorBlog::ctrActualizarVista($rutas[1]);
+
 }
 
 /*======================================

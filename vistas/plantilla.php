@@ -1,6 +1,6 @@
 <?php
 $blog = ControladorBlog::ctrMostrarBlog();
-$categorias = ControladorBlog::ctrMostrarCategorias();
+$categorias = ControladorBlog::ctrMostrarCategorias(null, null);
 $articulos = ControladorBlog::ctrMostrarConInnerJoin(0, 5, null, null);
 $totalArticulos = ControladorBlog::ctrMostrarTotalArticulos(null, null);
 $totalPaginas = ceil(count($totalArticulos)/5);
