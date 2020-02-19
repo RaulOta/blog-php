@@ -8,6 +8,21 @@ if (isset($rutas[1])){
 
 }
 
+/*======================================
+======================================*/
+
+function limitarForeach($array, $limite){
+
+	foreach ($array as $key => $value) {
+		
+		if(!$limite--) break;
+
+		yield $key => $value;
+
+	}
+
+}
+
 ?>
 
 <!--=====================================
@@ -392,77 +407,33 @@ CONTENIDO ARTÍCULO
 					
 					<h4>Artículos Recientes</h4>
 
-					<div class="d-flex my-3">
+					<?php foreach (limitarForeach($totalArticulos, 3) as $key => $value): ?>
+
+						<div class="d-flex my-3">
 						
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-							
-							<a href="articulos.html">
+							<div class="w-100 w-xl-50 pr-3 pt-2">
+								
+								<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$value["ruta_articulo"]; ?>">
 
-								<img src="<?php echo $blog["dominio"];?>vistas/img/articulo05.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+									<img src="<?php echo $blog["dominio"].$value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
 
-							</a>
+								</a>
 
-						</div>
+							</div>
 
-						<div>
+							<div>
 
-							<a href="articulos.html" class="text-secondary">
+								<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$value["ruta_articulo"]; ?>" class="text-secondary">
 
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+									<p class="small"><?php echo substr($value["descripcion_articulo"], 0, -150)."..."; ?></p>
 
-							</a>
+								</a>
 
-						</div>
-
-					</div>
-
-					<div class="d-flex my-3">
-						
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-							
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog["dominio"];?>vistas/img/articulo06.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
+							</div>
 
 						</div>
 
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
-
-					<div class="d-flex my-3">
-						
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-							
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog["dominio"];?>vistas/img/articulo07.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
-
-						</div>
-
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
+					<?php endforeach?>
 
 
 				</div>

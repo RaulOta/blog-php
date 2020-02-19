@@ -84,7 +84,7 @@ Class ModeloBlog{
 
         }else{
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id_articulo DESC");
             $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
             $stmt -> execute();
