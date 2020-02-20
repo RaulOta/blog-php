@@ -55,7 +55,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 						<meta name="title" content="'.$value["titulo_categoria"].'">
 						<meta name="description" content="'.$value["descripcion_categoria"].'">';
-	
+
 						echo '<meta property="og:site_name" content="'.$value["titulo_categoria"].'">
 							<meta property="og:title" content="'.$value["titulo_categoria"].'">
 							<meta property="og:description" content="'.$value["descripcion_categoria"].'">
@@ -123,6 +123,14 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 						$p_claves = substr($p_claves, 0, -2);
 	
 						echo '<meta name="keywords" content="'.$p_claves.'">';
+
+						echo '<meta property="og:site_name" content="'.$blog["titulo"].'">
+						<meta property="og:title" content="'.$blog["titulo"].'">
+						<meta property="og:description" content="'.$blog["descripcion"].'">
+						<meta property="og:type" content="Type">
+						<meta property="og:image" content="'.$blog["dominio"].$blog["portada"].'">
+						<meta property="og:url" content="'.$blog["dominio"].'">
+					';
 
 			}
 		}else{
@@ -252,8 +260,13 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 				if($rutas[0] == $value["ruta_categoria"]){
 	
 					$validarRuta = "categorias";
+
 				break;
 	
+				}else{
+
+					$validarRuta ="buscador";
+
 				}
 			}
 		}
@@ -292,6 +305,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 		if($validarRuta == "categorias"){
 
 			include "paginas/categorias.php";
+
+		}else if($validarRuta == "buscador"){
+
+			include "paginas/buscador.php";
 
 		}else if($validarRuta == "articulos"){
 

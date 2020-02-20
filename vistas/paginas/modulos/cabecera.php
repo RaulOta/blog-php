@@ -62,13 +62,13 @@ CABECERA
 				
 				<div class="input-group float-right w-50 pl-xl-5 pb-3">
 					
-					<input type="text" class="form-control" placeholder="Buscar">
+					<input type="text" class="form-control buscador text-lowercase" placeholder="Buscar">
 
 					<div class="input-group-append">
 						
 						<span class="input-group-text bg-primary border-0" style="cursor:pointer">
 							
-							<i class="fas fa-search"></i>
+							<i class="fas fa-search buscar"></i>
 
 						</span>
 

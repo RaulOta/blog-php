@@ -248,3 +248,67 @@ $("#fotoOpinion").change(function(){
 
 })
 
+/*=============================================
+BUSCADOR
+=============================================*/
+$(".buscador").change(function(){
+
+	var busqueda = $(this).val().toLowerCase();
+
+	var expresion = /^[a-z0-9ñÑáéíóú ]*$/;
+
+	if (!expresion.test(busqueda)) {
+
+		$(".buscador").val("");
+		
+	}else{
+
+		var evaluarBusqueda = busqueda.replace(/[0-9ñáéíóú ]/g,"_");
+
+		var rutaBuscador = evaluarBusqueda;
+
+		$(".buscar").click(function(){
+
+			if ($(".buscador").val() != "") {
+
+				window.location = rutaActual+rutaBuscador;
+				
+			}
+
+		})
+
+	}
+
+})
+
+/*=============================================
+BUSCADOR CON ENTER
+=============================================*/
+$(document).on("keyup", ".buscador", function(evento){
+
+	evento.preventDefault();
+
+	if (evento.keyCode == 13 && $(".buscador").val() != "") {
+
+		var busqueda = $(this).val().toLowerCase();
+
+		var expresion = /^[a-z0-9ñÑáéíóú ]*$/;
+
+		if (!expresion.test(busqueda)) {
+
+			$(".buscador").val("");
+			
+		}else{
+
+			var evaluarBusqueda = busqueda.replace(/[ñáéíóú ]/g,"_");
+
+			var rutaBuscador = evaluarBusqueda;
+
+			window.location = rutaActual+rutaBuscador;
+
+		}
+		
+	}
+
+})
+
