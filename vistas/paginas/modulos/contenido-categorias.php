@@ -2,8 +2,9 @@
 /*============================================
 Seleccionar los articulos de la categorí especifica
 ============================================*/
-if(isset($rutas["0"])){
-	$articulos = ControladorBlog::ctrMostrarConInnerJoin(0, 5, "ruta_categoria", $rutas["0"]);
+if(isset($rutas[0])){
+
+	$articulos = ControladorBlog::ctrMostrarConInnerJoin(0, 5, "ruta_categoria", $rutas[0]);
 
 	$totalArticulos = ControladorBlog::ctrMostrarTotalArticulos("id_cat", $articulos[0]["id_cat"]);
 
@@ -34,7 +35,7 @@ if(isset($rutas[1])){
 		
 		$desde = ($rutas[1] - 1)*5;
 		$cantidad = 5;
-		$articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", $rutas["0"]);
+		$articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", $rutas[0]);
 		
 	}else{
 
@@ -141,7 +142,7 @@ CONTENIDO CATEGORIA
 
 					<?php foreach ($tags as $key => $value): ?>
 
-						<a href="#<?php echo $value; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
+						<a href="<?php echo $blog["dominio"].preg_replace('/[0-9ñáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
 
 					<?php endforeach ?>					
 										

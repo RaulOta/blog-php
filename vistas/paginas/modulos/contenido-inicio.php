@@ -1,7 +1,7 @@
 <?php
-if(isset($rutas["0"]) && is_numeric($rutas["0"])){
+if(isset($rutas[0]) && is_numeric($rutas[0])){
 
-	$paginaActual = $rutas["0"];
+	$paginaActual = $rutas[0];
 
 }else{
 

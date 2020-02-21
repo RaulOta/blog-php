@@ -108,7 +108,6 @@ Class ModeloBlog{
 
         }
 
-
         $stmt -> close();
 
         $stmt = null;
@@ -232,7 +231,7 @@ Class ModeloBlog{
 
         $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.*, DATE_FORMAT(fecha_articulo, '%d.%m.%Y') 
             AS fecha_articulo FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_categoria = $tabla2.id_cat WHERE 
-            titulo_articulo LIKE '%$busqueda%' OR descripcion_articulo LIKE '%$busqueda%' OR p_claves_articulo 
+            titulo_articulo LIKE '%$busqueda%' OR descripcion_articulo LIKE '%$busqueda%' OR contenido_articulo 
             LIKE '%$busqueda%' OR ruta_articulo LIKE '%$busqueda%' ORDER BY $tabla2.id_articulo DESC LIMIT $desde,
             $cantidad");
 
@@ -255,7 +254,7 @@ Class ModeloBlog{
 
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta_articulo LIKE '%$busqueda%' OR
             titulo_articulo LIKE '%$busqueda%' OR descripcion_articulo LIKE '%$busqueda%' OR 
-            p_claves_articulo LIKE '%$busqueda%' OR ruta_articulo LIKE '%$busqueda%'");
+            contenido_articulo LIKE '%$busqueda%' OR ruta_articulo LIKE '%$busqueda%'");
         
         $stmt -> execute();
 

@@ -98,11 +98,12 @@ PAGINACIÓN
 //la función Number para convertir el valor de la variable string a entero (.pagination -> nombre de la clase/evento)
 var totalPaginas = Number($(".pagination").attr("totalPaginas"));
 
-var rutaActual = $("#rutaActual").val(); //Se esta capturando el valor que se esta registrando en el input oculdo en la plantilla para traer la dirección actual
-
 var paginaActual = Number($(".pagination").attr("paginaActual"));
 
+var rutaActual = $("#rutaActual").val(); //Se esta capturando el valor que se esta registrando en el input oculdo en la plantilla para traer la dirección actual
+
 var rutaPagina = $(".pagination").attr("rutaPagina"); //Variable que capture la ruta de la página
+
 
 if($(".pagination").length != 0){
 
@@ -119,10 +120,12 @@ if($(".pagination").length != 0){
 	}).on("page", function(evt, page){
 		
 		if(rutaPagina != ""){
+			alert(rutaActual+rutaPagina+"/"+page);
 
 			window.location = rutaActual+rutaPagina+"/"+page;	
 
 		}else{
+			//alert (page);
 
 			//console.log("evt", page);
 			//console.log("page", page);

@@ -25,7 +25,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 			foreach($categorias as $key => $value){
 
-				if( !is_numeric($rutas[0]) && $rutas[0] == $value["ruta_categoria"] ){
+				if( !is_numeric($rutas[0]) && $rutas[0] == $value["ruta_categoria"]){
 
 					$validarRuta = "categorias";
 
