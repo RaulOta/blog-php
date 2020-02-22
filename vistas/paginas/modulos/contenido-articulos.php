@@ -11,6 +11,7 @@ if (isset($rutas[1])){
 }
 
 /*======================================
+Función para limitar foreach
 ======================================*/
 
 function limitarForeach($array, $limite){
@@ -24,6 +25,8 @@ function limitarForeach($array, $limite){
 	}
 
 }
+
+$anuncios = ControladorBlog::ctrTraerAnuncios("articulos");
 
 ?>
 
@@ -442,23 +445,11 @@ CONTENIDO ARTÍCULO
 
 				<!-- PUBLICIDAD -->
 
-				<div class="mb-4">
-					
-					<img src="<?php echo $blog["dominio"];?>vistas/img/ad03.png" class="img-fluid">
+				<?php foreach($anuncios as $key => $value): ?>
 
-				</div>
+					<?php echo $value["codigo_anuncio"]; ?>
 
-				<div class="my-4">
-					
-					<img src="<?php echo $blog["dominio"];?>vistas/img/ad02.jpg" class="img-fluid">
-
-				</div>	
-
-				<div class="my-4">
-					
-					<img src="<?php echo $blog["dominio"];?>vistas/img/ad06.png" class="img-fluid">
-
-				</div>	
+				<?php endforeach ?>	
 				
 			</div>
 

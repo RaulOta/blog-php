@@ -6,11 +6,11 @@ BUSCADOR PARA MÓVIL
 	
 	<div class="input-group input-group-sm">
 
-		<input type="text" class="form-control" placeholder="Buscar">
+		<input type="text" class="form-control buscador" placeholder="Buscar">
 
 		<div class="input-group-append">
 
-			<span class="input-group-text"><i class="fas fa-search"></i></span>
+			<span class="input-group-text"><i class="fas fa-search buscar"></i></span>
 
 		</div>
 	</div>

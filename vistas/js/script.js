@@ -120,7 +120,6 @@ if($(".pagination").length != 0){
 	}).on("page", function(evt, page){
 		
 		if(rutaPagina != ""){
-			alert(rutaActual+rutaPagina+"/"+page);
 
 			window.location = rutaActual+rutaPagina+"/"+page;	
 
