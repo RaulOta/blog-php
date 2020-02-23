@@ -263,6 +263,12 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
 				break;
 	
+				}else if($rutas[0] == "sobre-mi"){
+	
+					$validarRuta = "sobre-mi";
+
+				break;
+	
 				}else{
 
 					$validarRuta ="buscador";
@@ -309,6 +315,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 		}else if($validarRuta == "buscador"){
 
 			include "paginas/buscador.php";
+
+		}else if($validarRuta == "sobre-mi"){
+
+			include "paginas/sobre-mi.php";
 
 		}else if($validarRuta == "articulos"){
 
