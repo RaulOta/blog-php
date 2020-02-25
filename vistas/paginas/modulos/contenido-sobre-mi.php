@@ -28,6 +28,68 @@
 
                     <input type="submit" class="btn btn-primary" value="Enviar">
 
+                    <?php
+
+                        $enviarCorreo = ControladorCorreo::ctrEnviarCorreo();
+
+                        if ($enviarCorreo != "") {
+                            
+                            echo '<script>
+
+									if( window.history.replaceState ){
+
+										window.history.replaceState( null, null, window.location.href );
+
+									}
+
+                                </script>';
+                                
+                                if ($enviarCorreo == "ok") {
+									
+									echo '<script>
+
+										notie.alert({
+											type: 1,
+											text: "El mensaje ha sido enviado correctamente, espere muy pronto una respuesta",
+											time: 10
+										})
+											
+									</script>';
+
+								}
+
+								if ($enviarCorreo == "error") {
+									
+									echo '<script>
+									
+										notie.alert({
+											type: 3,
+											text: "No se pudo enviar el mensaje, inténtelo nuevamente",
+											time: 10
+										})
+											
+									</script>';
+
+                                }
+                                
+                                if ($enviarCorreo == "error-sintaxis") {
+									
+									echo '<script>
+									
+										notie.alert({
+											type: 3,
+											text: "Error, no se permiten caracteres especiales, inténtelo nuevamente",
+											time: 10
+										})
+											
+									</script>';
+
+								}
+
+                        }
+
+                    ?>
+
                 </form>
             
             </div>
