@@ -36,56 +36,56 @@
                             
                             echo '<script>
 
-									if( window.history.replaceState ){
+								if( window.history.replaceState ){
 
-										window.history.replaceState( null, null, window.location.href );
-
-									}
-
-                                </script>';
-                                
-                                if ($enviarCorreo == "ok") {
-									
-									echo '<script>
-
-										notie.alert({
-											type: 1,
-											text: "El mensaje ha sido enviado correctamente, espere muy pronto una respuesta",
-											time: 10
-										})
-											
-									</script>';
+									window.history.replaceState( null, null, window.location.href );
 
 								}
 
-								if ($enviarCorreo == "error") {
-									
-									echo '<script>
-									
-										notie.alert({
-											type: 3,
-											text: "No se pudo enviar el mensaje, inténtelo nuevamente",
-											time: 10
-										})
-											
-									</script>';
-
-                                }
+                            </script>';
                                 
-                                if ($enviarCorreo == "error-sintaxis") {
+                            if ($enviarCorreo == "ok") {
 									
-									echo '<script>
-									
-										notie.alert({
-											type: 3,
-											text: "Error, no se permiten caracteres especiales, inténtelo nuevamente",
-											time: 10
-										})
+								echo '<script>
+
+									notie.alert({
+										type: 1,
+										text: "El mensaje ha sido enviado correctamente, espere muy pronto una respuesta",
+										time: 10
+									})
 											
-									</script>';
+								</script>';
 
-								}
+							}
 
+							if ($enviarCorreo == "error") {
+									
+								echo '<script>
+									
+									notie.alert({
+										type: 3,
+										text: "No se pudo enviar el mensaje, inténtelo nuevamente",
+										time: 10
+									})
+											
+								</script>';
+
+                            }
+                                
+                            if ($enviarCorreo == "error-sintaxis") {
+									
+								echo '<script>
+									
+									notie.alert({
+										type: 3,
+										text: "Error, no se permiten caracteres especiales, inténtelo nuevamente",
+										time: 10
+									})
+											
+								</script>';
+
+                            }
+                            
                         }
 
                     ?>
