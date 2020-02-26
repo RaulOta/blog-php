@@ -1,0 +1,42 @@
+Nota:
+Verificar la versión de php
+
+
+-Crear un proyecto nuevo
+C:/xampp/ejemplo laravel new cms
+
+
+-Agregar la base de datos al proyecto Laravel modificando el archivo .env solo las siguientes líneas
+DB_DATABASE=blog-php
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+-Migrar/generar las tablas que trae por defecto Laravel en la base de datos
+C:/xampp/ejemplo/cms> php artisan migrate
+	Nota: si surgue un error al crear las tablas en la base de datos agregar en las archivos lo siguiente:
+		1.-vendor/laravel/framework/src\Illuminate/Database/Schema/grammars/Builder.php
+			Sustituir: public static $defaultStringLength = 255;
+			Por:	public static $defaultStringLength = 250;
+
+		2.-app/Providers/AppServiceProvider.php
+			Agregar: use Illuminate\Support\Facades\Schema;
+				public function boot(){ Schema::defaultStringLength(191); }
+
+
+-Autentificación en laravel (http://laravel.com/docs/6.x/authentication)
+C:/xampp/ejemplo/cms> composer require laravel/ui --dev -> Se ejecutan para obtener un entorno de desarrollo con Laravel
+C:/xampp/ejemplo/cms> php artisan ui vue --auth (instalamos archivos auxiliares) -> Al ejecutar los comandos se crea:
+		El archivo HomeController.php en app/Http/Controller.php, 
+		El archivo home.blade.php en resources/views/home.blade.php y 
+		Se genera código:
+			Auth::routes();
+			Route::get('/home', 'HomeController@index')->name('home'); 
+				en web.php en la ruta routes/web.php
+
+
+
+
+
+
+
