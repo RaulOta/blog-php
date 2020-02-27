@@ -35,6 +35,20 @@ C:/xampp/ejemplo/cms> php artisan ui vue --auth (instalamos archivos auxiliares)
 				en web.php en la ruta routes/web.php
 
 
+-Plantilla tradicional de Laravel
+Para utilizar la plantilla se debe instalar:
+	*Node.js(Entorno de ejecución para JavaScript construido con el motor de JavaScript V8 de Chrome, nodejs.org/es)
+	*NPM(sistema de gestión de paquetes por defecto de Node.js).
+Después de la instalación (al instalar Node.js se instala automaticamente npm), se descargan todas las dependencias 
+para trabajar sin ningún problema ejecutando los comandos:
+	C:/xampp/ejemplo/cms> npm i
+	C:/xampp/ejemplo/cms> npm run dev
+
+
+-middleaware('guest')->PAJE que pregunta que la persona que esta ejecutando todas las tareas es una persona autorizada 
+o es un invitado/Es donde se valida que tipo de usuario esta ingresando si es un invitado o usuario privado
+
+
 
 
 
