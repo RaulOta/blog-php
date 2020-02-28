@@ -40,6 +40,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     
+    {{-- JS OverlayScrollbars --}}
+    <script src="{{ url('/') }}/js/plugins/jquery.overlayScrollbars.min.js"></script>
+    
     {{-- JS AdminLTE --}}
     <script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
