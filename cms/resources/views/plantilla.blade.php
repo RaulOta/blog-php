@@ -55,7 +55,7 @@
 
         @include('modulos.sidebar')
 
-        @include('paginas.inicio')
+        @yield('content')
 
         @include('modulos.footer')
 
