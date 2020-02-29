@@ -4,7 +4,7 @@
 
   <div class="content-wrapper" style="min-height: 247px;">
 
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) --> 
 
     <section class="content-header">
 
@@ -68,7 +68,9 @@
 
               <div class="card-body">
 
-                Start creating your amazing application!
+                @foreach ($administradores as $element)
+                    {{ $element }}
+                @endforeach
 
               </div>
               <!-- /.card-body -->

@@ -68,7 +68,9 @@
 
               <div class="card-body">
 
-                Start creating your amazing application!
+                @foreach ($anuncios as $element)
+                    {{ $element }}
+                @endforeach
 
               </div>
               <!-- /.card-body -->

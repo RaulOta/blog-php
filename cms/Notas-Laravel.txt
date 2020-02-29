@@ -71,7 +71,8 @@ Crear controladores automaticamente en Laravel con artisan
 C:/xampp/ejemplo/cms> php artisan make:controller BlogController/AdministradoresController/CategoriasController ...
 Ruta de creación: cms/app/Http/Controllers
 
-
+NOTA: El archivo web.php es el archivo en donde se guardan las rutas de todo el sitio y se puedan visualizar
+Ruta del archivo cms/routes/we.php
 
 
 

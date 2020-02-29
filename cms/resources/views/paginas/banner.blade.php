@@ -68,7 +68,11 @@
 
               <div class="card-body">
 
-                Start creating your amazing application!
+                @foreach ($banner as $element)
+
+                    {{ $element }}
+                
+                @endforeach
 
               </div>
               <!-- /.card-body -->
