@@ -49,6 +49,29 @@ para trabajar sin ningún problema ejecutando los comandos:
 o es un invitado/Es donde se valida que tipo de usuario esta ingresando si es un invitado o usuario privado
 
 
+Plantilla AdminLTE
+Se descarga la plantilla desde su página oficial para que se pueda adaptar al cms del blog o de acuerdo a las necesidades
+de cada persona
+
+
+@yield -> ya no trae una sola página en un solo archivo si no que trae un contenido dinamico
+
+
+@extends -> 
+
+@section -> 
+
+
+-Los controladores y modelos que se crean son de acuerdo a las tablas con la que se trabaja en la base de datos
+Crear modelos automaticamente en Laravel con artisan
+C:/xampp/ejemplo/cms> php artisan make:model BlogModel/Administradores/Categorias ...
+Ruta de creación: cms/app/
+
+Crear controladores automaticamente en Laravel con artisan
+C:/xampp/ejemplo/cms> php artisan make:controller BlogController/AdministradoresController/CategoriasController ...
+Ruta de creación: cms/app/Http/Controllers
+
+
 
 
 
