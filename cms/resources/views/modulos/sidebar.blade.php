@@ -105,7 +105,7 @@
           
           <li class="nav-item">
 
-            <a href="{{ substr(url("/"),0,-11) }}" class="nav-link active" target="_blank">
+            <a href="{{ substr(url("/"),0,-11) }}" class="nav-link" target="_blank">
 
               <i class="nav-icon fas fa-globe"></i>
 
