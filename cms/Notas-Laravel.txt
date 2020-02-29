@@ -82,7 +82,16 @@ NOTA: Laravel tiene la opción de hacer Inner Join desde el módelo o controlador
 
 
 Fnción para hacer Inner Joins
-belongsTo('App\Categorias', 'id_cat', 'id_categoria')
+belongsTo('App\Categorias', 'id_cat', 'id_categoria');
+
+Recursos de rutas en Laravel
+
+-Ver rutas que se estan utilizando en el proyecto desde cmd con artisan
+C:/xampp/ejemplo/cms> php artisan route:list
+
+NOTA: Despues de de utilizar "Route::rosource" en las rutas todos los metodos de los controladores deben de llevar
+el nombre que indica en la lista de rutas GET=index, DELETE=destroy, etc.
+
 
 
 

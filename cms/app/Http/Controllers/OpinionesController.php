@@ -7,7 +7,7 @@ use App\Opiniones;
 
 class OpinionesController extends Controller
 {
-    public function traerOpiniones()
+    public function index()
     {
 
         $opiniones = Opiniones::all();

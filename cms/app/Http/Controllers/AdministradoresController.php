@@ -7,7 +7,7 @@ use App\Administradores;
 
 class AdministradoresController extends Controller
 {
-    public function traerAdministradores(){
+    public function index(){
 
         $administradores = Administradores::all();
 

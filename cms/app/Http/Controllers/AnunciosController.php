@@ -7,7 +7,7 @@ use App\Anuncios;
 
 class AnunciosController extends Controller
 {
-    public function traerAnuncios() {
+    public function index() {
 
         $anuncios = Anuncios::all();
 
