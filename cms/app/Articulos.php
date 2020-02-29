@@ -9,4 +9,13 @@ class Articulos extends Model
 
         protected $tabla = 'articulos';
 
+        /*==================================
+        INNER JOIN DESDE EL MODELO
+        ==================================*/
+        public function categorias(){
+
+                return $this->belongsTo('App\Categorias', 'id_cat', 'id_categoria');
+
+        }
+ 
 }
