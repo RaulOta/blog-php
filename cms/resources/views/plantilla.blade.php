@@ -19,6 +19,9 @@
     {{-- TAGS Input --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
 
+    {{-- Summernote --}}
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+
     {{-- CSS AdminLTE --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
 
@@ -50,6 +53,10 @@
     {{-- https://www.jqueryscript.net/form/Bootstrap-4-Tag-Input-Plugin-jQuery.html --}}
     <script src="{{ url('/') }}/js/plugins/tagsinput.js"></script>
 
+    {{-- Summernote --}}
+    {{-- https://summernote.org/ --}}
+    <script src="{{ url('/') }}/js/plugins/summernote.js"></script>
+
     {{-- JS AdminLTE --}}
     <script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
@@ -67,6 +74,8 @@
         @include('modulos.footer')
 
     </div>
+
+<script src="{{ url('/') }}/js/codigo.js"></script>
     
 </body>
 </html>

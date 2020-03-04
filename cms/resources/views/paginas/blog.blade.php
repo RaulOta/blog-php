@@ -373,7 +373,7 @@
 
                         <label>Sobre mi <span class="small">(Intro)</span></label>
 
-                        <textarea class="form-control" name="sobre_mi" rows="10">{{$element->sobre_mi}}</textarea>
+                        <textarea class="form-control summernote" name="sobre_mi" rows="10">{{$element->sobre_mi}}</textarea>
   
                       </div>
   
@@ -389,7 +389,7 @@
 
                         <label>Sobre mi <span class="small">(Completo)</span></label>
 
-                        <textarea class="form-control" name="sobre_mi_completo" rows="10">{{$element->sobre_mi_completo}}</textarea>
+                        <textarea class="form-control summernote" name="sobre_mi_completo" rows="10">{{$element->sobre_mi_completo}}</textarea>
   
                       </div>
   
