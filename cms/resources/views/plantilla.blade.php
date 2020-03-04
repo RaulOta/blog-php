@@ -16,13 +16,16 @@
     {{-- OverlayScrollbars.min.css --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/OverlayScrollbars.min.css">
 
+    {{-- TAGS Input --}}
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
+
     {{-- CSS AdminLTE --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
 
     {{-- google fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/OverlayScrollbars.min.css">
+
 
     <!--===================================================
     PLUGINS DE JS
@@ -43,6 +46,10 @@
     {{-- JS OverlayScrollbars --}}
     <script src="{{ url('/') }}/js/plugins/jquery.overlayScrollbars.min.js"></script>
     
+    {{-- TAGS Input --}}
+    {{-- https://www.jqueryscript.net/form/Bootstrap-4-Tag-Input-Plugin-jQuery.html --}}
+    <script src="{{ url('/') }}/js/plugins/tagsinput.js"></script>
+
     {{-- JS AdminLTE --}}
     <script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 

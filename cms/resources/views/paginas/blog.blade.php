@@ -146,13 +146,13 @@
 
                           @endphp
 
-                          <input type="text" class="form-control" name="palabras_claves" value="{{$palabras_claves}} required">
+                          <input type="text" data-role="tagsinput" class="form-control" name="palabras_claves" value="{{$palabras_claves}} required">
 
                         </div>
 
                         <hr class="pb-2">
                         
-                        {{-- Palabras claves --}}
+                        {{-- Redes Sociales --}}
 
                         <label>Redes Sociales</label>
 
