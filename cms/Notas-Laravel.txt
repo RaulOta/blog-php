@@ -63,6 +63,12 @@ de cada persona
 
 protected ->
 
+@method('PUT') -> Para indicar a Laravel el tipo de metodo que se va a utilizar (PUT) ya que no se puede escribir en la etiqueta Form
+que es de tipo method="PUT".
+
+@CSRF -> Genera un token de seguridad para averiguar si el que esta haciendo las peticiones esta autorizado a eliminar, actualizar
+etc., y es importante de colocarlo para evitar ataques al sistema
+
 
 -Los controladores y modelos que se crean son de acuerdo a las tablas con la que se trabaja en la base de datos
 Crear modelos automaticamente en Laravel con artisan
@@ -91,6 +97,8 @@ C:/xampp/ejemplo/cms> php artisan route:list
 
 NOTA: Despues de de utilizar "Route::rosource" en las rutas todos los metodos de los controladores deben de llevar
 el nombre que indica en la lista de rutas GET=index, DELETE=destroy, etc.
+
+CROSS SITE REQUEST FORGERY (CSRF)
 
 
 

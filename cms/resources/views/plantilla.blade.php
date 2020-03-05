@@ -22,6 +22,9 @@
     {{-- Summernote --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
 
+    {{-- Notie (Alerts) --}}
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/notie.css">
+
     {{-- CSS AdminLTE --}}
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
 
@@ -56,6 +59,10 @@
     {{-- Summernote --}}
     {{-- https://summernote.org/ --}}
     <script src="{{ url('/') }}/js/plugins/summernote.js"></script>
+    
+    {{-- Notie (Alerts) --}}
+    {{-- https://github.com/jaredreich/notie --}}
+    <script src="{{ url('/') }}/js/plugins/notie.js"></script>
 
     {{-- JS AdminLTE --}}
     <script src="{{ url('/') }}/js/plugins/adminlte.js"></script>

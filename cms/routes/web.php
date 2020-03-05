@@ -47,6 +47,7 @@ php artisan route:list
 ================================================*/
 
 Route::resource('/', 'BlogController');
+Route::resource('/blog', 'BlogController');
 Route::resource('/administradores', 'AdministradoresController');
 Route::resource('/articulos', 'ArticulosController');
 Route::resource('/categorias', 'CategoriasController');
