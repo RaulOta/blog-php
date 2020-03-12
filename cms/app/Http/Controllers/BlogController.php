@@ -32,7 +32,8 @@ class BlogController extends Controller
                         "servidor"=>$request->input("servidor"),
                         "titulo"=>$request->input("titulo"),
                         "descripcion"=>$request->input("descripcion"),
-                        "palabras_claves"=>$request->input("palabras_claves"));
+                        "palabras_claves"=>$request->input("palabras_claves"),
+                        "redes_sociales"=>$request->input("redes_sociales"));
 
         //Validar los datos
 
@@ -44,7 +45,8 @@ class BlogController extends Controller
                 "servidor" => 'required|regex:/^[-\\_\\:\\.\\0-9a-z]+$/i',
                 "titulo" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
                 "descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                "palabras_claves" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+                "palabras_claves" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                "redes_sociales" => 'required'
             
             ]);
 
@@ -59,7 +61,8 @@ class BlogController extends Controller
                                     "servidor" => $datos["servidor"],
                                     "titulo" => $datos["titulo"],
                                     "descripcion" => $datos["descripcion"],
-                                    "palabras_claves" => json_encode(explode(",",$datos["palabras_claves"])));
+                                    "palabras_claves" => json_encode(explode(",",$datos["palabras_claves"])),
+                                    "redes_sociales" => $datos["redes_sociales"]);
 
                 $blog = Blog::where("id", $id)->update($actualizar);
 

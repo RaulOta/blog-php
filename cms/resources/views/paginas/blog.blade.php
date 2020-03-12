@@ -244,9 +244,11 @@
                           </div>
                           {{-- fin del row --}}
 
-                          <div class="row">
+                          <div class="row listadoRed">
 
                             @php
+
+                              echo"<input type='hidden' name='redes_sociales' value='".$element->redes_sociales."' id='listaRed' >";
                                 
                               $redes = json_decode($element->redes_sociales, true);          
                               
@@ -272,7 +274,7 @@
 
                                         <div class="input-group-text" style="cursor:pointer">
                                         
-                                          <span class="bg-danger px-2 rounded-circle">&times;</span>
+                                          <span class="bg-danger px-2 rounded-circle eliminarRed" red="'.$value["icono"].'" url="'.$value["url"].'">&times;</span>
                                           
                                         </div>
 
