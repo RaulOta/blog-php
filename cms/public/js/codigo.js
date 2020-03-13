@@ -85,6 +85,59 @@ $(document).on("click", ".eliminarRed", function(){
 
 })
 
+/*=======================================
+PREVISUALIZAR IMÁGENES TEMPORALES
+=======================================*/
+$("input[type='file']").change(function(){
+
+    var imagen = this.files[0];
+    var tipo = $(this).attr("name");
+
+    /*=======================================
+    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+    =======================================*/
+
+    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+
+        $("input[type='file']").val("");
+
+        notie.alert({
+
+            type: 3,
+            text: '¡La imagen debe estar en formato JPG o PNG',
+            time: 7
+
+        })
+
+    }else if (imagen["size"] > 2000000) {
+        
+        $("input[type='file']").val("");
+
+        notie.alert({
+
+            type: 3,
+            text: '¡La imagen no debe pesar más de 2MB!',
+            time: 7
+
+        })
+
+    }else{
+
+        var datosImagen = new FileReader;
+        datosImagen.readAsDataURL(imagen);
+
+        $(datosImagen).on("load", function(event){
+
+            var rutaImagen = event.target.result;
+
+            $(".previsualizarImg_"+tipo).attr("src", rutaImagen);
+
+        })
+
+    }
+    
+
+})
 
 /*=======================================
 SUMMERNOTE
