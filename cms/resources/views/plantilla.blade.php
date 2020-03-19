@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Blog del viajero | CMS</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="{{$blog[0]["icono"]}}">
 
     <!--===================================================
     PLUGINS DE CSS

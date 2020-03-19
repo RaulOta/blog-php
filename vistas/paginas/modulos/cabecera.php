@@ -6,14 +6,14 @@ CABECERA
 	
 	<div class="container p-0">
 		
-		<div class="row">
+		<div class="row"> 
 			
 			<!-- LOGO -->
 			<div class="col-10 col-sm-11 col-md-8 pt-1 pt-lg-3 p-xl-0">
 				
 				<a href="<?php echo $blog["dominio"]; ?>">
 					
-					<img src="<?php echo $blog["dominio"];?><?php echo $blog["logo"]?>" alt="Logo de Juanito Travel" class="img-fluid logotipo">
+					<img src="<?php echo $blog["servidor"];?><?php echo $blog["logo"]?>" alt="Logo de Juanito Travel" class="img-fluid logotipo">
 
 				</a>
 

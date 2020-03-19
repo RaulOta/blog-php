@@ -187,7 +187,7 @@ CONTENIDO ARTÍCULO
 										
 										<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$value["ruta_articulo"] ?>" class="text-secondary">
 
-											<img src="<?php echo $blog["dominio"].$value["portada_articulo"];?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
+											<img src="<?php echo $blog["servidor"].$value["portada_articulo"];?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
 
 											<h6 class="py-2"><?php echo $value["titulo_articulo"]; ?></h6>
 
@@ -239,7 +239,7 @@ CONTENIDO ARTÍCULO
 
 								<div class="col-3 col-sm-4 col-lg-2 p-2">
 							
-									<img src="<?php echo $blog["dominio"].$value["foto_opinion"];?>" class="img-thumbnail">	
+									<img src="<?php echo $blog["servidor"].$value["foto_opinion"];?>" class="img-thumbnail">	
 
 								</div>
 
@@ -275,7 +275,7 @@ CONTENIDO ARTÍCULO
 
 									<div class="col-3 col-sm-4 col-lg-2 p-2">
 									
-										<img src="<?php echo $blog["dominio"].$value["foto_admin"];?>" class="img-thumbnail">	
+										<img src="<?php echo $blog["servidor"].$value["foto_admin"];?>" class="img-thumbnail">	
 
 									</div>
 
@@ -320,7 +320,7 @@ CONTENIDO ARTÍCULO
 
 							<label for="fotoOpinion" class="d-none d-md-block col-md-4 col-lg-3">
 								
-								<img src="<?php echo $blog["dominio"];?>vistas/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoOpinion">
+								<img src="<?php echo $blog["servidor"];?>vistas/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoOpinion">
 
 							</label>
 
@@ -395,7 +395,7 @@ CONTENIDO ARTÍCULO
 
 					<!-- PUBLICIDAD -->
 
-					<img src="<?php echo $blog["dominio"];?>vistas/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
+					<img src="<?php echo $blog["servidor"];?>vistas/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
 
 
 				</div>
@@ -420,7 +420,7 @@ CONTENIDO ARTÍCULO
 								
 								<a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]."/".$value["ruta_articulo"]; ?>">
 
-									<img src="<?php echo $blog["dominio"].$value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
+									<img src="<?php echo $blog["servidor"].$value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
 
 								</a>
 

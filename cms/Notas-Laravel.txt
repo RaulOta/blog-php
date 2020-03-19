@@ -101,5 +101,12 @@ el nombre que indica en la lista de rutas GET=index, DELETE=destroy, etc.
 CROSS SITE REQUEST FORGERY (CSRF)
 
 
+=====================================================PHP=========================================================
+move_uploaded_file($portada["portada_temporal"], $rutaPortada); Función para subir al servidor archivos Word, PDF, XML.
+
+
+
+
+
 
 
