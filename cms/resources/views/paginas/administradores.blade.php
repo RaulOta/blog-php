@@ -50,27 +50,67 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">Title</h3>
-
-                <div class="card-tools">
-
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-
-                    <i class="fas fa-minus"></i></button>
-
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-
-                    <i class="fas fa-times"></i></button>
-
-                </div>
+                <button class="btn btn-primary btn-sm">Crear nuevo administrador</button>
 
               </div>
 
               <div class="card-body">
 
-                @foreach ($administradores as $element)
-                    {{ $element }}
-                @endforeach
+                <table class="table table-bordered table-striped" width="100%">
+
+                  <thead>
+
+                    <tr>
+
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Correo</th>
+                      <th width="50px">Foto</th>
+                      <th>Rol</th>
+                      <th>Acciones</th>
+
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    @foreach ($administradores as $key => $value)
+                      
+                      <tr>
+
+                      <td>{{($key+1)}}</td>
+                      <td>{{($value["name"])}}</td>
+                      <td>{{($value["email"])}}</td>
+                      <td><img src="{{($value["foto"])}}" class="img-fluid rounded-circle"></td>
+                      <td>{{($value["rol"])}}</td>
+                      <td>
+
+                        <div class="btn-group">
+
+                          <button class="btn btn-warning btn-sm">
+
+                            <i class="fas fa-pencil-alt text-white"></i>
+
+                          </button>
+
+                          <button class="btn btn-danger btn-sm">
+
+                            <i class="fas fa-trash-alt"></i>
+
+                          </button>
+
+                        </div>
+
+                      </td>
+
+                      </tr>
+
+                    @endforeach
+
+                  </tbody>
+
+                </table>
 
               </div>
               <!-- /.card-body -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Opiniones;
+use App\Blog;
 
 class OpinionesController extends Controller
 {
@@ -11,8 +12,9 @@ class OpinionesController extends Controller
     {
 
         $opiniones = Opiniones::all();
+        $blog = Blog::all();
 
-        return view("paginas.opiniones", array("opiniones"=>$opiniones));
+        return view("paginas.opiniones", array("opiniones"=>$opiniones, "blog"=>$blog));
 
     }
 }
