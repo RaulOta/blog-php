@@ -85,6 +85,8 @@
 
     </div>
 
+<input type="hidden" id="ruta" value="{{url('/')}}">
+
 <script src="{{ url('/') }}/js/codigo.js"></script>
     
 </body>

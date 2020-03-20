@@ -36,7 +36,9 @@ class BlogController extends Controller
                         "redes_sociales"=>$request->input("redes_sociales"),
                         "logo_actual"=>$request->input("logo_actual"),
                         "portada_actual"=>$request->input("portada_actual"),
-                        "icono_actual"=>$request->input("icono_actual"));
+                        "icono_actual"=>$request->input("icono_actual"),
+                        "sobre_mi"=>$request->input("sobre_mi"),
+                        "sobre_mi_completo"=>$request->input("sobre_mi_completo"));
 
         //recoger las imágenes
         $logo = array("logo_temporal"=>$request->file("logo"));
@@ -56,7 +58,9 @@ class BlogController extends Controller
                 "redes_sociales" => 'required',
                 "logo_actual" => 'required',
                 "portada_actual" => 'required',
-                "icono_actual" => 'required'
+                "icono_actual" => 'required',
+                "sobre_mi" => 'required|regex:/^[(\\)\\=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                "sobre_mi_completo" => 'required|regex:/^[(\\)\\=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
             
             ]);
 
@@ -254,6 +258,19 @@ class BlogController extends Controller
 
                 }
 
+                // Mover todos loa ficheros temporales de blog al destino final
+
+                $origen = glob('img/temp/blog/*');
+
+                foreach($origen as $fichero){
+
+                    copy($fichero, "img/blog/".substr($fichero, 14));
+                    unlink($fichero);
+
+                }
+
+                $blog = Blog::all();
+
                 $actualizar = array("dominio" => $datos["dominio"],
                                     "servidor" => $datos["servidor"],
                                     "titulo" => $datos["titulo"],
@@ -262,7 +279,9 @@ class BlogController extends Controller
                                     "redes_sociales" => $datos["redes_sociales"],
                                     "portada"=>$rutaPortada,
                                     "logo"=>$rutaLogo,
-                                    "icono"=>$rutaIcono);
+                                    "icono"=>$rutaIcono,
+                                    "sobre_mi"=>str_replace('src="'.$blog[0]["servidor"].'img/temp/blog', 'src="'.$blog[0]["servidor"].'img/blog', $datos["sobre_mi"]),
+                                    "sobre_mi_completo"=>str_replace('src="'.$blog[0]["servidor"].'img/temp/blog', 'src="'.$blog[0]["servidor"].'img/blog', $datos["sobre_mi_completo"]));
 
                 $blog = Blog::where("id", $id)->update($actualizar);
 

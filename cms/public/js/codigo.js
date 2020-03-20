@@ -1,4 +1,9 @@
 /*=======================================
+CAPTURANDO LA RUTA DE MI CMS
+=======================================*/
+var ruta = $("#ruta").val();
+
+/*=======================================
 AGREGAR RED
 =======================================*/
 $(document).on("click", ".agregarRed", function(){
@@ -143,4 +148,96 @@ $("input[type='file']").change(function(){
 SUMMERNOTE
 =======================================*/
 
-$(".summernote").summernote();
+$(".summernote-sm").summernote({
+
+    height: 300,
+    callbacks: {
+
+        onImageUpload: function(files){
+
+            for (var i = 0; i < files.length; i++) {
+                upload_sm(files[i]);
+                
+            }
+
+        }
+
+    }
+
+});
+
+$(".summernote-smc").summernote({
+
+    height: 300,
+    callbacks: {
+
+        onImageUpload: function(files){
+
+            for (var i = 0; i < files.length; i++) {
+                upload_smc(files[i]);
+                
+            }
+
+        }
+
+    }
+
+});
+
+/*=======================================
+SUBIR IMÁGEN AL SERVIDOR
+=======================================*/
+
+function upload_sm(file){
+
+    var datos = new FormData();
+    datos.append('file', file, file.name);
+    datos.append("ruta", ruta);
+
+    $.ajax({
+
+        url: ruta+"/ajax/upload.php",
+        method: "POST",
+        data: datos,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (respuesta){
+
+            $('.summernote-sm').summernote("insertImage", respuesta);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+    })
+
+}
+
+function upload_smc(file){
+
+    var datos = new FormData();
+    datos.append('file', file, file.name);
+    datos.append("ruta", ruta);
+
+    $.ajax({
+
+        url: ruta+"/ajax/upload.php",
+        method: "POST",
+        data: datos,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (respuesta){
+
+            $('.summernote-smc').summernote("insertImage", respuesta);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+    })
+
+}
