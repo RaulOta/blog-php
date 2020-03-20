@@ -98,7 +98,7 @@ C:/xampp/ejemplo/cms> php artisan route:list
 NOTA: Despues de de utilizar "Route::rosource" en las rutas todos los metodos de los controladores deben de llevar
 el nombre que indica en la lista de rutas GET=index, DELETE=destroy, etc.
 
-CROSS SITE REQUEST FORGERY (CSRF)
+CROSS SITE REQUEST FORGERY (CSRF) -> Nos ayuda a prevenir ataques al sistema, se utiliza en formularios, ...
 
 
 =====================================================PHP=========================================================
