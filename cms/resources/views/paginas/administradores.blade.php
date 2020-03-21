@@ -82,8 +82,31 @@
                       <td>{{($key+1)}}</td>
                       <td>{{($value["name"])}}</td>
                       <td>{{($value["email"])}}</td>
-                      <td><img src="{{($value["foto"])}}" class="img-fluid rounded-circle"></td>
-                      <td>{{($value["rol"])}}</td>
+
+                      @php
+                          
+                        if($value["foto"] == ""){
+
+                          echo '<td><img src="'.url('/').'/img/administradores/admin.png" class="img-fluid rounded-circle"></td>';
+
+                        }else{
+
+                          echo '<td><img src="'.url('/').'/'.$value["foto"].'" class="img-fluid rounded-circle"></td>';
+
+                        }
+
+                        if($value["rol"] == ""){
+
+                            echo '<td>administrador</td>';
+
+                        }else{
+
+                          echo '<td>'.$value["rol"].'</td>';
+
+                        }
+
+                      @endphp
+                      
                       <td>
 
                         <div class="btn-group">
