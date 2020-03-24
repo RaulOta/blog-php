@@ -97,7 +97,7 @@ class AdministradoresController extends Controller
 
             if ($foto["foto"] != "") {
                 
-                $validarFoto = \Validator::make($imagen, [
+                $validarFoto = \Validator::make($foto, [
 
                     "foto" => "required|image|mimes:jpg,jpeg,png|max:2000000"
 
@@ -117,9 +117,17 @@ class AdministradoresController extends Controller
                 
             }else{
 
-                if ($foto["foto"] !="" && $datos["imagen_actual"] != "img/administradores/admin.png") {
-                    
-                    unlink($datos["imagen_actual"]);
+                if ($foto["foto"] !="") {
+
+                    if(!empty($datos["imagen_actual"])){
+
+                        if($datos["imagen_actual"] != "img/administradores/admin.png"){
+
+                            unlink($datos["imagen_actual"]);
+                        
+                        }
+
+                    }
 
                     $aleatorio = mt_rand(100, 999);
 
@@ -148,6 +156,31 @@ class AdministradoresController extends Controller
         }else{
 
             return redirect("/administradores")->with("error", "");
+
+        }
+
+    }
+
+    /*============================================
+    Eliminar un registro
+    ============================================*/
+
+    public function destroy($id, Request $request){
+
+        $validar = Administradores::where("id", $id)->get();
+
+        if(!empty($validar) && $id != 1){
+
+            unlink($validar[0]["foto"]);
+
+            $administradores = Administradores::where("id", $validar[0]["id"])->delete();
+
+            return redirect("/administradores")->with("ok-eliminar", "");
+
+        }
+        else{
+
+            return redirect("/administradores")->with("no-borrar", "");
 
         }
 

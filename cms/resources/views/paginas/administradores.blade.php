@@ -117,11 +117,19 @@
 
                           </a>
 
-                          <button class="btn btn-danger btn-sm">
+                          <form method="post" action="{{url('/')}}/administradores/{{$value["id"]}}">
 
-                            <i class="fas fa-trash-alt"></i>
+                            <input type="hidden" name="_method" value="DELETE">
 
-                          </button>
+                            @csrf
+
+                            <button type="submit" class="btn btn-danger btn-sm">
+
+                              <i class="fas fa-trash-alt"></i>
+
+                            </button>
+                          
+                          </form>
 
                         </div>
 
@@ -397,11 +405,11 @@
 
                     @if ($value["foto"] == "")
 
-                      <img src="{{url('/')}}/img/administradores/admin.png" class="previsualizarImg img-fluid py-2 w-25 rounded-circle">
+                      <img src="{{url('/')}}/img/administradores/admin.png" class="previsualizarImg_foto img-fluid py-2 w-25 rounded-circle">
 
                     @else
 
-                      <img src="{{url('/')}}/{{$value["foto"]}}" class="previsualizarImg img-fluid py-2 w-25 rounded-circle">
+                      <img src="{{url('/')}}/{{$value["foto"]}}" class="previsualizarImg_foto img-fluid py-2 w-25 rounded-circle">
                         
                     @endif
 
@@ -469,6 +477,22 @@
 
     <script>
       notie.alert({ type: 1, text: '¡El administrador ha sido actualizado correctamente!', time: 10 });
+    </script>
+
+  @endif
+
+  @if (Session::has("ok-eliminar"))
+
+    <script>
+      notie.alert({ type: 1, text: '¡El administrador ha sido eliminado correctamente!', time: 10 });
+    </script>
+
+  @endif
+
+  @if (Session::has("no-borrar"))
+
+    <script>
+      notie.alert({ type: 2, text: '¡Este administrador no se puede borrar!', time: 10 });
     </script>
 
   @endif
