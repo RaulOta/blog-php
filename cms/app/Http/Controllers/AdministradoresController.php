@@ -15,10 +15,21 @@ class AdministradoresController extends Controller
 
     public function index(){
 
-        $administradores = Administradores::all();
+        // $administradores = Administradores::all();
+        // $blog = Blog::all();
+
+        // return view("paginas.administradores", array("administradores"=>$administradores, "blog"=>$blog));
+
+        if(request()->ajax()){
+
+            return datatables()->of(Administradores::all())
+            -> make(true);
+
+        }
+
         $blog = Blog::all();
 
-        return view("paginas.administradores", array("administradores"=>$administradores, "blog"=>$blog));
+        return view("paginas.administradores", array("blog"=>$blog));
 
     }
 

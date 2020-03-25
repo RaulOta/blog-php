@@ -75,7 +75,7 @@
 
                   <tbody>
 
-                    @foreach ($administradores as $key => $value)
+                    {{-- @foreach ($administradores as $key => $value)
                       
                       <tr>
 
@@ -123,7 +123,7 @@
 
                             <i class="fas fa-trash-alt"></i>
 
-                          </button>
+                          </button> --}}
                           
                           {{-- <form method="post" action="{{url('/')}}/administradores/{{$value["id"]}}">
 
@@ -139,13 +139,13 @@
                           
                           </form> --}}
                           
-                        </div>
+                        {{-- </div>
 
                       </td>
 
                       </tr>
 
-                    @endforeach
+                    @endforeach --}}
 
                   </tbody>
 

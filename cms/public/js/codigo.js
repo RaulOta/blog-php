@@ -321,11 +321,60 @@ $(document).on("click", ".eliminarRegistro", function(){
 })
 
 /*=======================================
+DataTable Servidor de administradores
+=======================================*/
+
+$.ajax({
+
+    url: ruta+"/administradores",
+    success: function(respuesta){
+
+        console.log("respuesta", respuesta);
+
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+        console.error(textStatus + " " + errorThrown);
+    }
+    
+})
+
+/*=======================================
 DataTables de administradores
 =======================================*/
 
 $("#tablaAdministradores").DataTable({
 
+    processing: true,
+    serverSide: true,
+    ajax:{
+        url: ruta+"/administradores"
+    },
+    columns: [
+        {
+            data: 'id',
+            name: 'id'
+        },
+        {
+            data: 'name',
+            name: 'name'
+        },
+        {
+            data: 'email',
+            name: 'email'
+        },
+        {
+            data: 'foto',
+            name: 'foto'
+        },
+        {
+            data: 'rol',
+            name: 'rol'
+        },
+        {
+            data: 'id',
+            name: 'id'
+        }
+    ],
     "language":{
 
         "sProcessing": "Procesando...",
