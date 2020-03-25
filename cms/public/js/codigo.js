@@ -329,7 +329,7 @@ $.ajax({
     url: ruta+"/administradores",
     success: function(respuesta){
 
-        console.log("respuesta", respuesta);
+        //console.log("respuesta", respuesta);
 
     },
     error: function(jqXHR, textStatus, errorThrown){
@@ -342,13 +342,25 @@ $.ajax({
 DataTables de administradores
 =======================================*/
 
-$("#tablaAdministradores").DataTable({
+var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
     processing: true,
     serverSide: true,
+
     ajax:{
         url: ruta+"/administradores"
     },
+
+    "columnDefs":[{
+
+        "searchable": true,
+        "orderable": true,
+        "targets": 0
+
+    }],
+
+    "order":[0, "desc"],
+
     columns: [
         {
             data: 'id',
@@ -434,3 +446,9 @@ $("#tablaAdministradores").DataTable({
     }
 
 });
+
+tablaAdministradores.on('order.dt search.dt', function(){
+
+    tablaAdministradores.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+}).draw();
