@@ -260,8 +260,6 @@ $(document).on("click", ".eliminarRegistro", function(){
     //var token = $(this).attr("token");
     var pagina = $(this).attr("pagina");
     var token = $(this).children("[name='_token']").attr("value");
-    //var tokenNuevo = $('meta[name="csrf_token"]').attr('content');
-    //console.log("token nuevo", tokenNuevo);
 
     swal({
         title: '¿Está seguro de eliminar este registro?',
@@ -279,14 +277,12 @@ $(document).on("click", ".eliminarRegistro", function(){
             var datos = new FormData();
             datos.append("_method", method);
             datos.append("_token", token);
-            //alert(token);
 
             $.ajax({
 
                 url: action,
                 method: "POST",
                 data: datos,
-                //data: {"_token": token},
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -323,3 +319,37 @@ $(document).on("click", ".eliminarRegistro", function(){
     })
 
 })
+
+/*=======================================
+DataTables de administradores
+=======================================*/
+
+$("#tablaAdministradores").DataTable({
+
+    "language":{
+
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptypeTable": "Ningún dato disponible en esta tabla",
+        "sInfo": "Mostrando registros del _START_ al _END_",
+	    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+	    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+	    "sInfoPostFix": "",
+	    "sSearch": "Buscar:",
+	    "sUrl": "",
+	    "sInfoThousands": ",",
+	    "sLoadingRecords": "Cargando...",
+	    "oPaginate": {
+	      "sFirst": "Primero",
+	      "sLast": "Último",
+	      "sNext": "Siguiente",
+	      "sPrevious": "Anterior"
+	    },
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+    }
+
+});

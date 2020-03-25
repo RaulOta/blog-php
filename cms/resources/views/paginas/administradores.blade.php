@@ -56,7 +56,7 @@
 
               <div class="card-body">
 
-                <table class="table table-bordered table-striped" width="100%">
+                <table class="table table-bordered table-striped dt-responsive" width="100%" id="tablaAdministradores">
 
                   <thead>
 
