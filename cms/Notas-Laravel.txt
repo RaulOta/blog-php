@@ -101,6 +101,20 @@ el nombre que indica en la lista de rutas GET=index, DELETE=destroy, etc.
 CROSS SITE REQUEST FORGERY (CSRF) -> Nos ayuda a prevenir ataques al sistema, se utiliza en formularios, ...
 
 
+
+DataTables con Laravel
+Instalar la libreria:
+CMD - C:/xampp/ejemplo/cms> composer require yajra/laravel-datatables-Oracle
+
+Módificar el archivo 
+cms/config/app.php en la sección 'providers'
+Yajra\Datatables\DatatablesServiceProvider::class,
+
+Módificar el archivo 
+cms/config/app.php en la sección 'aliases'
+'Datatables'=> Yajra\Datatables\Facades\Datatables::class,
+
+
 =====================================================PHP=========================================================
 move_uploaded_file($portada["portada_temporal"], $rutaPortada); Función para subir al servidor archivos Word, PDF, XML.
 
