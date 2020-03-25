@@ -6,6 +6,7 @@
     <title>Blog del viajero | CMS</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
 
     <link rel="icon" href="{{$blog[0]["icono"]}}">
 
@@ -66,6 +67,10 @@
     {{-- Notie (Alerts) --}}
     {{-- https://github.com/jaredreich/notie --}}
     <script src="{{ url('/') }}/js/plugins/notie.js"></script>
+
+    {{-- Sweet Alert (Alerts) --}}
+    {{-- https://sweetalert2.github.io/ --}}
+    <script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
 
     {{-- JS AdminLTE --}}
     <script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
