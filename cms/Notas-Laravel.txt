@@ -115,6 +115,14 @@ cms/config/app.php en la sección 'aliases'
 'Datatables'=> Yajra\Datatables\Facades\Datatables::class,
 
 
+Middleware: guest VS auth
+El middleware es un término que se utiliza para describir productos separados que sirven como unión entre dos aplicaciones de 
+software:
+Frontend - Lado cliente (guest = invitado)
+Backend - Lado Servidor (auth = autorizado)
+Módificar el middleware en el archivo app/Http/Controllers/Auth/RegisterController.php
+
+
 =====================================================PHP=========================================================
 move_uploaded_file($portada["portada_temporal"], $rutaPortada); Función para subir al servidor archivos Word, PDF, XML.
 
