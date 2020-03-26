@@ -52,28 +52,40 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
-          <!--======================================
-          Botón Blog
-          =======================================-->
 
-          <li class="nav-item">
-            <a href="{{ url("/") }}" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>Blog</p>
-            </a>
-          </li>
+          @foreach ($administradores as $element)
+              
+            @if ($_COOKIE["email_login"] == $element->email)
+            
+              @if ($element->rol == "administrador")
 
-          <!--======================================
-          Botón Administradores
-          =======================================-->
+                <!--======================================
+                Botón Blog
+                =======================================-->
 
-          <li class="nav-item">
-            <a href="{{ url("/administradores") }}" class="nav-link">
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p>Administradores</p>
-            </a>
-          </li>
+                <li class="nav-item">
+                  <a href="{{ url("/") }}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>Blog</p>
+                  </a>
+                </li>
+
+                <!--======================================
+                Botón Administradores
+                =======================================-->
+
+                <li class="nav-item">
+                  <a href="{{ url("/administradores") }}" class="nav-link">
+                    <i class="nav-icon fas fa-users-cog"></i>
+                    <p>Administradores</p>
+                  </a>
+                </li>
+                  
+              @endif
+
+            @endif
+
+          @endforeach
 
           <!--======================================
           Botón Categorias
