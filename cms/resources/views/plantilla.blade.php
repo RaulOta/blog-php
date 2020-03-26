@@ -88,22 +88,35 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+@if (Route::has('login'))
 
-    <div class="wrapper">
-        @include('modulos.header')
+    @auth
 
-        @include('modulos.sidebar')
+        <body class="hold-transition sidebar-mini layout-fixed">
+            
+            <div class="wrapper">
 
-        @yield('content')
+                @include('modulos.header')
 
-        @include('modulos.footer')
+                @include('modulos.sidebar')
 
-    </div>
+                @yield('content')
 
-<input type="hidden" id="ruta" value="{{url('/')}}">
+                @include('modulos.footer')
 
-<script src="{{ url('/') }}/js/codigo.js"></script>
+            </div>
+
+            <input type="hidden" id="ruta" value="{{url('/')}}">
+
+            <script src="{{ url('/') }}/js/codigo.js"></script>
+            
+        </body>
+
+    @else
+
+        @include('paginas.login')
+
+    @endauth
     
-</body>
+@endif
 </html>
