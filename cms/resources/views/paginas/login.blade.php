@@ -32,7 +32,7 @@
 
                         </div>
 
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
+                        <input id="email" type="email" class="form-control email_login @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -81,5 +81,7 @@
 
     </div>
     <!-- /.login-box -->
+
+    <script src="{{ url('/') }}/js/login.js"></script>
 
 </body>

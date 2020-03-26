@@ -14,7 +14,17 @@
 
       <li class="nav-item">
         <a class="nav-link">
-          Hola, Administrador
+          
+          @foreach ($administradores as $element)
+              
+            @if ($_COOKIE["email_login"] == $element->email)
+                
+              Hola, {{$element->name}}
+
+            @endif
+
+          @endforeach
+
         </a>
       </li>
 

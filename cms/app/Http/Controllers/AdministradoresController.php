@@ -47,8 +47,9 @@ class AdministradoresController extends Controller
         }
 
         $blog = Blog::all();
+        $administradores = Administradores::all();
 
-        return view("paginas.administradores", array("blog"=>$blog));
+        return view("paginas.administradores", array("blog"=>$blog, "administradores"=>$administradores));
 
     }
 

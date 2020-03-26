@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Opiniones;
 use App\Blog;
+use App\Administradores;
 
 class OpinionesController extends Controller
 {
@@ -14,7 +15,7 @@ class OpinionesController extends Controller
         $opiniones = Opiniones::all();
         $blog = Blog::all();
 
-        return view("paginas.opiniones", array("opiniones"=>$opiniones, "blog"=>$blog));
+        return view("paginas.opiniones", array("opiniones"=>$opiniones, "blog"=>$blog, "administradores"=>$administradores));
 
     }
 }
