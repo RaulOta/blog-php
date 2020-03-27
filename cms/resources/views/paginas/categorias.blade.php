@@ -14,7 +14,7 @@
 
           <div class="col-sm-6">
 
-            <h1>Categorias</h1>
+            <h1>Categorías</h1>
 
           </div>
 
@@ -24,7 +24,7 @@
 
               <li class="breadcrumb-item"><a href="{{url('/')}}">Inicio</a></li>
 
-              <li class="breadcrumb-item active">Categorias</li>
+              <li class="breadcrumb-item active">Categorías</li>
 
             </ol>
 
@@ -50,29 +50,45 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">Title</h3>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#crearCategoria">Crear nueva categoría
 
-                <div class="card-tools">
-
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-
-                    <i class="fas fa-minus"></i></button>
-
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-
-                    <i class="fas fa-times"></i></button>
-
-                </div>
+                </button>
 
               </div>
 
               <div class="card-body">
 
-                @foreach ($categorias as $element)
+                {{--@foreach ($categorias as $element)
                     
                   {{ $element }}
 
-                @endforeach
+                @endforeach--}}
+
+                <table class="table table-bordered table-striped dt-responsive" id="tablaCategorias" width="100%">
+
+                  <thead>
+
+                    <tr>
+
+                      <th width="10px">#</th>
+                      <th>Título</th>
+                      <th>Descripción</th>
+                      <th>Palabras claves</th>
+                      <th>Ruta</th>
+                      <th width="200px">Imágen</th>
+                      <th>Acciones</th>
+  
+                    </tr>
+  
+                  </thead>
+
+                  <tbody>
+
+
+
+                  </tbody>
+
+                </table>
 
               </div>
               <!-- /.card-body -->

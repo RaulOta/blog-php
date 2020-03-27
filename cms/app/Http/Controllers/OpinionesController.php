@@ -14,6 +14,7 @@ class OpinionesController extends Controller
 
         $opiniones = Opiniones::all();
         $blog = Blog::all();
+        $administradores = Administradores::all();
 
         return view("paginas.opiniones", array("opiniones"=>$opiniones, "blog"=>$blog, "administradores"=>$administradores));
 
