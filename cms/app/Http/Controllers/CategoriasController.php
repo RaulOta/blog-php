@@ -59,5 +59,90 @@ class CategoriasController extends Controller
 
         return view("paginas.categorias", array("blog"=>$blog, "administradores"=>$administradores));
 
-    } 
+    }
+
+    /*=====================================
+    Crear un registro
+    =====================================*/
+
+    public function store(Request $request){
+
+        //Recoger datos
+        $datos = array( "titulo_categoria"=>$request->input("titulo_categoria"),
+                        "descripcion_categoria"=>$request->input("descripcion_categoria"),
+                        "p_claves_categoria"=>$request->input("p_claves_categoria"),
+                        "ruta_categoria"=>$request->input("ruta_categoria"),
+                        "imagen_temporal"=>$request->file("img_categoria"));
+
+        //Validar datos
+        if(!empty($datos)){
+
+            $validar = \Validator::make($datos, [
+
+                "titulo_categoria" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "descripcion_categoria" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "p_claves_categoria" => "required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "ruta_categoria" => "required|regex:/^[a-z0-9-]+$/i",
+                "imagen_temporal" => "required|image|mimes:jpg,jpeg,png|max:2000000"
+
+            ]);
+
+            // Guardar Categoría
+            if(!$datos["imagen_temporal"] || $validar->fails()){
+
+                return redirect("/categorias")->with("no-validacion", "");
+
+            }else{
+
+                $aleatorio = mt_rand(100,999);
+
+                $ruta = "img/categorias/".$aleatorio.".".$datos["imagen_temporal"]->guessExtension();
+                
+                //Redimensionar Imágen
+
+                list($ancho, $alto) = getimagesize($datos["imagen_temporal"]);
+
+                $nuevoAncho = 1024;
+                $nuevoAlto = 576;
+
+                if($datos["imagen_temporal"]->guessExtension() == "jpeg"){
+
+                    $origen = imagecreatefromjpeg($datos["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagejpeg($destino, $ruta);
+
+                }
+
+                if ($datos["imagen_temporal"]->guessExtension() == "png") {
+
+                    $origen = imagecreatefrompng($datos["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagealphablending($destino, FALSE);
+                    imagesavealpha($destino, TRUE);
+                    imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagepng($destino, $ruta);
+                    
+                }
+
+                $categoria = new Categorias();
+                $categoria->titulo_categoria = $datos["titulo_categoria"];
+                $categoria->descripcion_categoria = $datos["descripcion_categoria"];
+                $categoria->p_claves_categoria = json_encode(explode(",",$datos["p_claves_categoria"]));
+                $categoria->ruta_categoria = $datos["ruta_categoria"];
+                $categoria->img_categoria = $ruta;
+
+                $categoria->save();
+
+                return redirect("/categorias")->with("ok-crear", "");
+
+            }
+
+        }else{
+
+            return redirect("/categorias")->with("error", "");
+
+        }
+
+    }
 }

@@ -161,7 +161,7 @@
                 <i class="fas fa-link"></i>
               </div>
 
-              <input type="text" class="form-control inputRuta" name="ruta_ategoria" placeholder="Ingrese la ruta de la categoría" value="{{old("ruta_categoria")}}" required>
+              <input type="text" class="form-control inputRuta" name="ruta_categoria" placeholder="Ingrese la ruta de la categoría" value="{{old("ruta_categoria")}}" required>
 
             </div>
 
@@ -193,7 +193,7 @@
 
               <img class="previsualizarImg_img_categoria img-fluid py-2">
 
-              <p class="help-block small">Dimensiones: 359px * 254px | Peso Max. 2MB | Formato: JPG o PNG</p>
+              <p class="help-block small">Dimensiones: 1024px * 576px | Peso Max. 2MB | Formato: JPG o PNG</p>
 
             </div>
 
@@ -222,5 +222,35 @@
     </div>
 
   </div>
+
+  @if (Session::has("ok-crear"))
+
+    <script>
+
+      notie.alert({ type: 1, text: '¡La categoria ha sido creada correctamente!', time: 10 })
+
+    </script>
+      
+  @endif
+
+  @if (Session::has("no-validacion"))
+
+  <script>
+
+    notie.alert({ type: 2, text: '¡Hay campos no válidos en el formulario!', time: 10 })
+
+  </script>
+    
+@endif
+
+@if (Session::has("error"))
+
+<script>
+
+  notie.alert({ type: 3, text: '¡Error en el gestor de categorías!', time: 10 })
+
+</script>
+  
+@endif
   
 @endsection

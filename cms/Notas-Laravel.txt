@@ -123,6 +123,8 @@ Backend - Lado Servidor (auth = autorizado)
 Módificar el middleware en el archivo app/Http/Controllers/Auth/RegisterController.php
 
 
+Método Store en Laravel, al utilizar el método store se tienen que crear los campos created_at y updated_at en la BD
+
 =====================================================PHP=========================================================
 move_uploaded_file($portada["portada_temporal"], $rutaPortada); Función para subir al servidor archivos Word, PDF, XML.
 
