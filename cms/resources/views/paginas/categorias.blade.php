@@ -93,13 +93,6 @@
               </div>
               <!-- /.card-body -->
 
-              <div class="card-footer">
-
-                Footer
-
-              </div>
-              <!-- /.card-footer-->
-
             </div>
             <!-- /.card -->
 
@@ -111,6 +104,122 @@
 
     </section>
     <!-- /.content -->
+
+  </div>
+
+  <!--=========================================
+  Crear Categorías
+  ==========================================-->
+  <div class="modal" id="crearCategoria">
+
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+
+        <form action="{{url('/')}}/categorias" method="POST" enctype="multipart/form-data">
+          
+          @csrf
+
+          <div class="modal-header bg-info">
+
+            <h4 class="modal-title">Crear Categoría</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          </div>
+
+          <div class="modal-body">
+
+            {{-- Título de la caegoría --}}
+
+            <div class="input-group mb-3">
+
+              <div class="input-group-append input-group-text">
+                <i class="fas fa-list-ul"></i>
+              </div>
+
+              <input type="text" class="form-control" name="titulo_categoria" placeholder="Ingrese el título de la categoría" value="{{old("titulo_categoria")}}" required>
+
+            </div>
+
+            {{-- Descripción categoría --}}
+
+            <div class="input-group mb-3">
+
+              <div class="input-group-append input-group-text">
+                <i class="fas fa-pencil-alt"></i>
+              </div>
+
+              <input type="text" class="form-control" name="descripcion_categoria" placeholder="Ingrese la descripción de la categoría" value="{{old("descripcion_categoria")}}" maxlength="30" required>
+
+            </div>
+
+            {{-- Ruta Categoría --}}
+
+            <div class="input-group mb-3">
+
+              <div class="input-group-append input-group-text">
+                <i class="fas fa-link"></i>
+              </div>
+
+              <input type="text" class="form-control inputRuta" name="ruta_ategoria" placeholder="Ingrese la ruta de la categoría" value="{{old("ruta_categoria")}}" required>
+
+            </div>
+
+            <hr class="pb-2">
+
+            {{-- Palabras claves categorías --}}
+
+            <div class="form-group mb-3">
+
+              <label>Palabras Claves <span class="small">(Separar por comas)</span></label>
+
+              <input type="text" class="form-control" value="categoría" name="p_claves_categoria" data-role="tagsinput" required>
+
+            </div>
+
+            {{-- Imágen de portada --}}
+
+            <hr class="pb-2">
+
+            <div class="form-group my-2 text-center">
+
+              <div class="btn btn-default btn-file">
+
+                <i class="fas fa-paperclip"></i> Adjuntar Imágen de la Categoría
+
+                <input type="file" name="img_categoria" required>
+
+              </div>
+
+              <img class="previsualizarImg_img_categoria img-fluid py-2">
+
+              <p class="help-block small">Dimensiones: 359px * 254px | Peso Max. 2MB | Formato: JPG o PNG</p>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer d-flex justify-content-between">
+
+            <div>
+
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+            </div>
+
+            <div>
+
+              <button type="submit" class="btn btn-primary">Guardar</button>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
 
   </div>
   

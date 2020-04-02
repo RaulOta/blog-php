@@ -319,3 +319,32 @@ $(document).on("click", ".eliminarRegistro", function(){
     })
 
 })
+
+/*=======================================
+Limpiar las rutas
+=======================================*/ 
+
+function limpiarUrl(texto){
+
+    var texto = texto.toLowerCase();
+    texto = texto.replace(/[á]/g, 'a');
+    texto = texto.replace(/[é]/g, 'e');
+    texto = texto.replace(/[í]/g, 'i');
+    texto = texto.replace(/[ó]/g, 'o');
+    texto = texto.replace(/[ú]/g, 'u');
+    texto = texto.replace(/[ñ]/g, 'n');
+    texto = texto.replace(/ /g, '-');
+
+    return texto;
+
+}
+
+$(document).on("keyup", ".inputRuta", function(){
+
+    $(this).val(
+
+        limpiarUrl($(this).val())
+
+      )
+
+})
