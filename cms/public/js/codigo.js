@@ -348,3 +348,31 @@ $(document).on("keyup", ".inputRuta", function(){
       )
 
 })
+
+/*=======================================
+Evitar repetir ruta (categorías)
+=======================================*/
+
+$(document).on("change", ".inputRuta", function(){
+
+    $(".alert").remove();
+
+    var valorRuta = $(this).val();
+    var validarRuta = $(".validarRuta");
+
+    for (var i = 0; i < validarRuta.length; i++) {
+        
+        if($(validarRuta[i]).html() == valorRuta){
+
+            $(".inputRuta").val("");
+            $(".inputRuta").parent().after(`
+            
+                <div class="alert alert-danger">¡Error! Esta ruta ya existe en la base de datos</div>
+
+            `);
+
+        }
+        
+    }
+
+})
