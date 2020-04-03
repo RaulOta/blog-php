@@ -167,4 +167,119 @@ class CategoriasController extends Controller
         }
 
     }
+
+    /*=====================================
+    Editar un registro
+    =====================================*/
+
+    public function update($id, Request $request){
+
+        // Recoger los datos
+
+        $datos = array("titulo_categoria"=>$request->input("titulo_categoria"),
+                        "descripcion_categoria"=>$request->input("descripcion_categoria"),
+                        "p_claves_categoria"=>$request->input("p_claves_categoria"),
+                        "ruta_categoria"=>$request->input("ruta_categoria"),
+                        "imagen_actual"=>$request->input("imagen_actual"));
+
+        // Recoger Imágen
+
+        $imagen = array("imagen_temporal"=>$request->file("img_categoria"));
+
+        // Validar los datos
+
+        if(!empty($datos)){
+
+            $validar = \Validator::make($datos, [
+
+                "titulo_categoria" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "descripcion_categoria" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "p_claves_categoria" => "required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "ruta_categoria" => "required|regex:/^[a-z0-9-]+$/i",
+                "imagen_actual" => "required"
+
+            ]);
+
+            if($imagen["imagen_temporal"] != ""){
+
+                $validarImagen = \Validator::make($imagen, [
+
+                    "imagen_temporal" => "required|image|mimes:jpg,jpeg,png|max:2000000"
+
+                ]);
+
+                if($validarImagen->fails()){
+
+                    return redirect("/categorias")->with("no-validacion", "");
+
+                }
+
+            }
+
+            if($validar->fails()){
+
+                return redirect("/categorias")->with("no-validacion", "");
+
+            }else{
+
+                if($imagen["imagen_temporal"] != ""){
+
+                    unlink($datos["imagen_actual"]);
+
+                    $aleatorio = mt_rand(100,999);
+
+                    $ruta = "img/categorias/".$aleatorio.".".$imagen["imagen_temporal"]->guessExtension();
+                    
+                    //Redimensionar Imágen
+
+                    list($ancho, $alto) = getimagesize($imagen["imagen_temporal"]);
+
+                    $nuevoAncho = 1024;
+                    $nuevoAlto = 576;
+
+                    if($imagen["imagen_temporal"]->guessExtension() == "jpeg"){
+
+                        $origen = imagecreatefromjpeg($imagen["imagen_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $ruta);
+
+                    }
+
+                    if ($imagen["imagen_temporal"]->guessExtension() == "png") {
+
+                        $origen = imagecreatefrompng($imagen["imagen_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $ruta);
+                        
+                    }
+
+                }else{
+
+                    $ruta = $datos["imagen_actual"];
+
+                }
+
+                $datos = array("titulo_categoria" => $datos["titulo_categoria"],
+                                "descripcion_categoria" => $datos["descripcion_categoria"],
+                                "p_claves_categoria" => json_encode(explode(",", $datos["p_claves_categoria"])),
+                                "ruta_categoria" => $datos["ruta_categoria"],
+                                "img_categoria" => $ruta);
+
+                $categoria = Categorias::where('id_categoria', $id)->update($datos);
+
+                return redirect("/categorias")->with("ok-editar", "");
+
+            }
+
+        }else{
+
+            return redirect("/categorias")->with("error", "");
+
+        }
+
+    }
 }
