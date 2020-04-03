@@ -411,5 +411,15 @@
 </script>
   
 @endif
+
+@if (Session::has("no-borrar"))
+
+<script>
+
+  notie.alert({ type: 3, text: '¡Error al borrar la categoría!', time: 10 })
+
+</script>
+  
+@endif
   
 @endsection 

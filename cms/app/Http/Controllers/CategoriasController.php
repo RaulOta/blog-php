@@ -40,7 +40,7 @@ class CategoriasController extends Controller
                                     <i class="fas fa-pencil-alt text-white"></i>
                                 </a>
 
-                                <button class="btn btn-danger btn-sm eliminarRegistro" action="'.url()->current().'/'.$data->id_categoria.'" method="DELETE" pagina="administradores" token="'.csrf_token().'">
+                                <button class="btn btn-danger btn-sm eliminarRegistro" action="'.url()->current().'/'.$data->id_categoria.'" method="DELETE" pagina="categorias" token="'.csrf_token().'">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
 
@@ -282,4 +282,35 @@ class CategoriasController extends Controller
         }
 
     }
+
+    /*============================================
+    Eliminar un registro
+    ============================================*/
+
+    public function destroy($id, Request $request){
+
+        $validar = Categorias::where("id_categoria", $id)->get();
+
+        if(!empty($validar)){
+
+            if(!empty($validar[0]["img_categoria"])){
+
+                unlink($validar[0]["img_categoria"]);    
+
+            }
+
+            $categoria = Categorias::where("id_categoria", $validar[0]["id_categoria"])->delete();
+
+            //Responder al AJAX de JS
+            return "ok";
+
+        }
+        else{
+
+            return redirect("/categorias")->with("no-borrar", "");
+
+        }
+
+    }
+
 }
