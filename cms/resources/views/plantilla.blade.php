@@ -111,6 +111,7 @@
             <script src="{{ url('/') }}/js/codigo.js"></script>
             <script src="{{ url('/') }}/js/administradores.js"></script>
             <script src="{{ url('/') }}/js/categorias.js"></script>
+            <script src="{{ url('/') }}/js/articulos.js"></script>
             
         </body>
 

@@ -50,7 +50,7 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">Title</h3>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#crearArticulo">Crear nuevo artículo</button>
 
                 <div class="card-tools">
 
@@ -68,7 +68,7 @@
 
               <div class="card-body">
 
-                <ul>
+                {{-- <ul>
 
                   @foreach ($articulos as $key => $value)
                       
@@ -81,7 +81,29 @@
 
                   @endforeach
 
-                </ul>
+                </ul> --}}
+
+                <table class="table table-bored table-striped dt-responsive" id="tablaArticulos" width="100%">
+
+                  <thead>
+
+                    <tr>
+
+                      <th width="10px">#</th>
+                      <th>Categorías</th>
+                      <th width="200px">Portada</th>
+                      <th>Título</th>
+                      <th>Descripción</th>
+                      <th>Palabras Claves</th>
+                      <th>Ruta</th>
+                      <th width="700px">Contenido</th>
+                      <th>Acciones</th>
+
+                    </tr>
+
+                  </thead>
+
+                </table>
 
               </div>
               <!-- /.card-body -->
