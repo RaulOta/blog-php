@@ -191,6 +191,24 @@ $(".summernote-smc").summernote({
 
 });
 
+$(".summernote-articulos").summernote({
+
+    height: 300,
+    callbacks: {
+
+        onImageUpload: function(files){
+
+            for (var i = 0; i < files.length; i++) {
+                upload_articulos(files[i]);
+                
+            }
+
+        }
+
+    }
+
+});
+
 /*=======================================
 SUBIR IMÁGEN AL SERVIDOR
 =======================================*/
@@ -200,6 +218,7 @@ function upload_sm(file){
     var datos = new FormData();
     datos.append('file', file, file.name);
     datos.append("ruta", ruta);
+    datos.append("carpeta", "blog");
 
     $.ajax({
 
@@ -227,6 +246,7 @@ function upload_smc(file){
     var datos = new FormData();
     datos.append('file', file, file.name);
     datos.append("ruta", ruta);
+    datos.append("carpeta", "blog");
 
     $.ajax({
 
@@ -239,6 +259,34 @@ function upload_smc(file){
         success: function (respuesta){
 
             $('.summernote-smc').summernote("insertImage", respuesta);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+    })
+
+}
+
+function upload_articulos(file){
+
+    var datos = new FormData();
+    datos.append('file', file, file.name);
+    datos.append("ruta", ruta);
+    datos.append("carpeta", "articulos");
+
+    $.ajax({
+
+        url: ruta+"/ajax/upload.php",
+        method: "POST",
+        data: datos,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (respuesta){
+
+            $('.summernote-articulos').summernote("insertImage", respuesta);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {

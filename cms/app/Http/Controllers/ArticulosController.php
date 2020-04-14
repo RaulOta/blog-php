@@ -95,9 +95,126 @@ class ArticulosController extends Controller
         //$articulos = Articulos::all();
         $blog = Blog::all();
         $administradores = Administradores::all();
+        $categorias = Categorias::all();
 
-        return view('paginas.articulos', array("blog"=>$blog, "administradores"=>$administradores));
+        return view('paginas.articulos', array("blog"=>$blog, "administradores"=>$administradores, "categorias"=>$categorias));
 
+    }
+
+    public function store(Request $request){
+
+        // Recoger los datos
+
+        $datos = array("id_cat"=>$request->input("id_cat"),
+                       "titulo_articulo"=>$request->input("titulo_articulo"),
+                       "descripcion_articulo"=>$request->input("descripcion_articulo"),
+                       "p_claves_articulo"=>$request->input("p_claves_articulo"),
+                       "ruta_articulo"=>$request->input("ruta_articulo"),
+                       "imagen_temporal"=>$request->file("img_articulo"),
+                       "contenido_articulo"=>$request->input("contenido-articulo"));
+
+        //echo '<pre>'; print_r($datos); echo '</pre>';
+        //return;
+
+        // Recoger datos de la BD blog para las rutas de imágenes
+
+        $blog = Blog::all();
+
+        // Validar los datos
+        // https://laravel.com/docs/5.7/validation
+        if(!empty($datos)){
+
+            $validar = \Validator::make($datos, [
+
+                "titulo_articulo" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "descripcion_articulo" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                "p_claves_articulo" => "required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "ruta_articulo" => "required|regex:/^[a-z0-9-]+$/i",
+                "imagen_temporal" => "required|image|mimes:jpg,jpeg,png|max:2000000",
+                "contenido_articulo" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+
+            ]);
+
+            // Guardar artículo
+
+            if(!$datos["imagen_temporal"] || $validar->fails()){
+
+                return redirect("articulos")->with("no-validacion", "");
+
+            }else{
+
+                //Creamos el directorio donde guardamos las imágenes del artículo
+
+                $directorio = "img/articulos/".$datos["ruta_articulo"];
+
+                if(!file_exists($directorio)){
+
+                    mkdir($directorio, 0755); //Crea directorios (0755) una carpeta con todos los permisos
+
+                }
+
+                $aleatorio = mt_rand(100,999);
+
+                $ruta = $directorio."/".$aleatorio.".".$datos["imagen_temporal"]->guessExtension();
+
+                // Redimensionar Imágen
+
+                list($ancho, $alto) = getimagesize($datos["imagen_temporal"]);
+
+                $nuevoAncho = 680;
+                $nuevoAlto = 400;
+
+                if($datos["imagen_temporal"]->guessExtension() == "jpeg"){
+
+                    $origen = imagecreatefromjpeg($datos["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagejpeg($destino, $ruta);
+
+                }
+
+                if($datos["imagen_temporal"]->guessExtension() == "png"){
+
+                    $origen = imagecreatefrompng($datos["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagealphablending($destino, FALSE);
+                    imagesavealpha($destino, TRUE);
+                    imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagepng($destino, $ruta);
+
+                }
+
+                // Mover todos los ficheros temporales al destino final
+                $origen = glob('img/temp/articulos/*');
+
+                foreach($origen as $fichero){
+
+                    copy($fichero, $directorio."/".substr($fichero, 19));
+                    unlink($fichero);
+
+                }
+
+                $articulo = new Articulos();
+                $articulo->id_cat = $datos["id_cat"];
+                $articulo->titulo_articulo = $datos["titulo_articulo"];
+                $articulo->descripcion_articulo = $datos["descripcion_articulo"];
+                $articulo->p_claves_articulo = json_encode(explode(",", $datos["p_claves_articulo"]));
+                $articulo->ruta_articulo = $datos["ruta_articulo"];
+                $articulo->portada_articulo = $ruta;
+                $articulo->contenido_articulo = str_replace('src="'.$blog[0]["servidor"].'img/temp/articulos', 'src="'.$blog[0]["servidor"].$directorio, $datos["contenido_articulo"]);
+                $articulo->vistas_articulo = 0;
+
+                $articulo->save();
+
+                return redirect("articulos")->with("ok-crear", "");
+
+            }
+
+        }else{
+
+            return redirect("articulos")->with("error", "");
+
+        }
     }
 
 }
