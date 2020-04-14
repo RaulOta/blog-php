@@ -386,4 +386,41 @@ class ArticulosController extends Controller
 
     }
 
+    /*============================================
+    Eliminar un registro
+    ============================================*/
+
+    public function destroy($id, Request $request){
+
+        $validar = Articulos::where("id_articulo", $id)->get();
+
+        if(!empty($validar)){
+
+            // Capturamos los archivps para eliminarlos uno por uno
+            $origen = glob('img/articulos/'.$validar[0]["ruta_articulo"].'/*');
+
+            foreach($origen as $fichero){
+
+                unlink($fichero);
+
+            }
+
+            // Eliminamos directorios
+
+            rmdir('img/articulos/'.$validar[0]["ruta_articulo"]);
+
+            $categoria = Articulos::where("id_articulo", $validar[0]["id_articulo"])->delete();
+
+            //Responder al AJAX de JS
+            return "ok";
+
+        }
+        else{
+
+            return redirect("/articulos")->with("no-borrar", "");
+
+        }
+
+    }
+
 }
