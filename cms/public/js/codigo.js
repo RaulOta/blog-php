@@ -209,6 +209,24 @@ $(".summernote-articulos").summernote({
 
 });
 
+$(".summernote-editar-articulo").summernote({
+
+    height: 300,
+    callbacks: {
+
+        onImageUpload: function(files){
+
+            for (var i = 0; i < files.length; i++) {
+                upload_editar_articulo(files[i]);
+                
+            }
+
+        }
+
+    }
+
+});
+
 /*=======================================
 SUBIR IMÁGEN AL SERVIDOR
 =======================================*/
@@ -230,7 +248,11 @@ function upload_sm(file){
         processData: false,
         success: function (respuesta){
 
-            $('.summernote-sm').summernote("insertImage", respuesta);
+            $('.summernote-sm').summernote("insertImage", respuesta, function ($image){
+
+                $image.attr('class', 'img-fluid');
+
+            });
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -258,7 +280,11 @@ function upload_smc(file){
         processData: false,
         success: function (respuesta){
 
-            $('.summernote-smc').summernote("insertImage", respuesta);
+            $('.summernote-smc').summernote("insertImage", respuesta, function ($image){
+
+                $image.attr('class', 'img-fluid');
+
+            });
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -286,7 +312,43 @@ function upload_articulos(file){
         processData: false,
         success: function (respuesta){
 
-            $('.summernote-articulos').summernote("insertImage", respuesta);
+            $('.summernote-articulos').summernote("insertImage", respuesta, function ($image){
+
+                $image.attr('class', 'img-fluid');
+
+            });
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+    })
+
+}
+
+function upload_editar_articulo(file){
+
+    var datos = new FormData();
+    datos.append('file', file, file.name);
+    datos.append("ruta", ruta);
+    datos.append("carpeta", "articulos");
+
+    $.ajax({
+
+        url: ruta+"/ajax/upload.php",
+        method: "POST",
+        data: datos,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (respuesta){
+
+            $('.summernote-editar-articulo').summernote("insertImage", respuesta, function ($image){
+
+                $image.attr('class', 'img-fluid');
+
+            });
 
         },
         error: function (jqXHR, textStatus, errorThrown) {

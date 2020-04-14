@@ -13,6 +13,10 @@ use App\Categorias;
 class ArticulosController extends Controller
 {
 
+    /*==============================================
+    Consultar y mostrar articulos con Join y DataTables
+    ==============================================*/
+
     public function index()
     {
 
@@ -100,6 +104,10 @@ class ArticulosController extends Controller
         return view('paginas.articulos', array("blog"=>$blog, "administradores"=>$administradores, "categorias"=>$categorias));
 
     }
+
+    /*==============================================
+    Agregar artículo
+    ==============================================*/
 
     public function store(Request $request){
 
@@ -215,6 +223,167 @@ class ArticulosController extends Controller
             return redirect("articulos")->with("error", "");
 
         }
+    }
+
+    /*==============================================
+    Mostrar un solo registro
+    ==============================================*/
+
+    public function show($id){
+
+        $articulos = Articulos::where('id_articulo', $id)->get();
+        $categorias = Categorias::all();
+        $blog = Blog::all();
+        $administradores = Administradores::all();
+
+        if(count($articulos) != 0){
+
+            return view("paginas.articulos", array("status"=>200, "articulo"=>$articulos, "categorias"=>$categorias, "blog"=>$blog, "administradores"=>$administradores));
+
+        }else{
+
+            return view("paginas.articulos", array("status"=>404, "blog"=>$blog, "administradores"=>$administradores));
+
+        }
+
+    }
+
+    /*==============================================
+    Editar un solo registro
+    ==============================================*/
+
+    public function update($id, Request $request){
+
+        // Recoger los datos
+
+        $datos = array("id_cat"=>$request->input("id_cat"),
+                       "titulo_articulo"=>$request->input("titulo_articulo"),
+                       "descripcion_articulo"=>$request->input("descripcion_articulo"),
+                       "p_claves_articulo"=>$request->input("p_claves_articulo"),
+                       "ruta_articulo"=>$request->input("ruta_articulo"),
+                       "imagen_actual"=>$request->input("imagen_actual"),
+                       "contenido_articulo"=>$request->input("contenido_articulo"));
+
+        // Recoger datos de la BD blog para las rutas de imágenes
+
+        $blog = Blog::all();
+
+        $directorio = "img/articulos/".$datos["ruta_articulo"];
+
+        // Recoger la imágen
+
+        $imagen = array("imagen_temporal"=>$request->file("img_articulo"));
+
+        // Validar los datos
+        // https://laravel.com/docs75.7/validacion
+        if(!empty($datos)){
+
+            $validar = \Validator::make($datos, [
+
+                "titulo_articulo" => "required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "descripcion_articulo" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                "p_claves_articulo" => "required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
+                "ruta_articulo" => "required|regex:/^[a-z0-9-]+$/i",
+                "imagen_actual" => "required",
+                "contenido_articulo" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+
+            ]);
+
+            if($imagen["imagen_temporal"] != ""){
+
+                $validarImagen = \Validator::make($imagen, [
+
+                    "imagen_temporal" => "required|image|mimes:jpg,jpeg,png|max:2000000"
+
+                ]);
+
+                if($validarImagen->fails()){
+
+                    return redirect("articulos")->with("no-validacion", "");
+
+                }
+
+            }
+
+            // Guardar artículo
+
+            if($validar->fails()){
+
+                return redirect("articulos")->with("no-validacion", "");
+
+            }else{
+
+                if($imagen["imagen_temporal"] != ""){
+
+                    unlink($datos["imagen_actual"]);
+
+                    $aleatorio = mt_rand(100,999);
+
+                    $ruta = $directorio."/".$aleatorio.".".$imagen["imagen_temporal"]->guessExtension();
+
+                    // Redimensionar Imágen
+
+                    list($ancho, $alto) = getimagesize($imagen["imagen_temporal"]);
+
+                    $nuevoAncho = 680;
+                    $nuevoAlto = 400;
+
+                    if($imagen["imagen_temporal"]->guessExtension() == "jpeg"){
+
+                        $origen = imagecreatefromjpeg($imagen["imagen_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $ruta);
+
+                    }
+
+                    if($imagen["imagen_temporal"]->guessExtension() == "png"){
+
+                        $origen = imagecreatefrompng($imagen["imagen_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $ruta);
+
+                    }
+
+                }else{
+
+                    $ruta = $datos["imagen_actual"];
+
+                }
+
+                // Mover todos los ficheros temporales al destino final
+                $origen = glob('img/temp/articulos/*');
+
+                foreach($origen as $fichero){
+
+                    copy($fichero, $directorio."/".substr($fichero, 19));
+                    unlink($fichero);
+
+                }
+
+                $datos = array("id_cat" => $datos["id_cat"],
+                                "titulo_articulo" => $datos["titulo_articulo"],
+                                "descripcion_articulo" => $datos["descripcion_articulo"],
+                                "p_claves_articulo" => json_encode(explode(",", $datos["p_claves_articulo"])),
+                                "ruta_articulo" => $datos["ruta_articulo"],
+                                "portada_articulo" => $ruta,
+                                "contenido_articulo" => str_replace('src="'.$blog[0]["servidor"].'img/temp/articulos', 'src="'.$blog[0]["servidor"].$directorio, $datos["contenido_articulo"]));
+
+                $articulo = Articulos::where('id_articulo', $id)->update($datos);
+
+                return redirect("articulos")->with("ok-editar", "");
+
+            }
+
+        }else{
+
+            return redirect("articulos")->with("error", "");
+
+        }
+
     }
 
 }

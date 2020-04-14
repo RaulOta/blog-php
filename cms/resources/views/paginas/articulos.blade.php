@@ -261,6 +261,205 @@
 
   </div>
 
+  <!--==================================================
+  Editar Categorías
+  ===================================================-->
+
+  @if (isset($status))
+    
+    @if ($status == 200)
+
+      @foreach ($articulo as $key => $value)
+
+        <div class="modal" id="editarArticulo">
+
+          <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+            <form action="{{url('/')}}/articulos/{{$value->id_articulo}}" method="POST" enctype="multipart/form-data">
+            
+              @method('PUT')
+
+              @csrf
+
+              <div class="modal-header bg-info">
+
+                <h4 class="modal-title">Editar Artículo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              </div>
+
+              {{-- Modal body --}}
+              <div class="modal-body">
+
+                {{-- Título Categoría --}}
+
+                <div class="input-group mb-3">
+
+                  <div class="input-group-append input-group-text">
+
+                    <i class="fas fa-list-ul"></i>
+
+                  </div>
+
+                  <select class="form-control" name="id_cat" required>
+
+                    @foreach ($categorias as $key => $value2)
+
+                      @if ($value2->id_categoria == $value->id_cat)
+
+                        <option value="{{$value->id_cat}}">{{$value2->titulo_categoria}}</option>
+                          
+                      @endif
+                        
+                    @endforeach
+
+                    @foreach ($categorias as $key => $value2)
+
+                      @if ($value2->id_categoria != $value->id_cat)
+
+                        <option value="{{$value2->id_categoria}}">{{$value2->titulo_categoria}}</option>
+                          
+                      @endif
+                        
+                    @endforeach
+
+                  </select>
+
+                </div>
+
+                {{-- Título Artículo --}}
+
+                <div class="input-group mb-3">
+
+                  <div class="input-group-append input-group-text">
+
+                    <i class="fas fa-list-ul"></i>
+
+                  </div>
+
+                  <input type="text" class="form-control" name="titulo_articulo" placeholder="Ingrese el título del artículo" value="{{$value->titulo_articulo}}">
+
+                </div>
+
+                {{-- Descripción artículo --}}
+
+                <div class="input-group mb-3">
+
+                  <div class="input-group-append input-group-text">
+
+                    <i class="fas fa-pencil-alt"></i>
+
+                  </div>
+
+                  <input type="text" class="form-control" name="descripcion_articulo" placeholder="Ingrese la descripción del artículo" value="{{$value->descripcion_articulo}}" maxlength="220" required>
+
+                </div>
+
+                {{-- Ruta artículo --}}
+
+                <div class="input-group mb-3">
+
+                  <div class="input-group-append input-group-text">
+
+                    <i class="fas fa-link"></i>
+
+                  </div>
+
+                  <input type="text" class="form-control inputRuta" name="ruta_articulo" placeholder="Ingrese la ruta del artículo" value="{{$value->ruta_articulo}}" readonly>
+
+                </div>
+
+                <hr class="pb-2">
+
+                {{-- Palabras claves artículos --}}
+
+                <div>
+
+                  <label>Palabras Claves <span class="small">(Separar por comas)</span></label>
+
+                  @php
+                      
+                    $tags = json_decode($value->p_claves_articulo, true);
+
+                    $p_claves = "";
+
+                    foreach ($tags as $element) {
+                      
+                      $p_claves .= $element.",";
+
+                    }
+
+                  @endphp
+
+                  <input type="text" class="form-control" name="p_claves_articulo" data-role="tagsinput" value="{{$p_claves}}" required>
+
+                </div>
+
+                <hr class="pb-2">
+
+                {{-- Adjuntar imágen --}}
+
+                <div class="form-group my-2 text-center">
+
+                  <div class="btn btn-default btn-file">
+
+                    <i class="fas fa-paperclip"></i> Adjuntar Imágen del artículo
+
+                    <input type="file" name="img_articulo">
+
+                  </div>
+
+                  <img src="{{url('/')}}/{{$value->portada_articulo}}" class="previsualizarImg_img_articulo img-fluid py-2">
+
+                  <input type="hidden" value="{{$value->portada_articulo}}" name="imagen_actual">
+
+                  <p class="help-block small">Dimenciones: 680 * 400px | Peso Max. 2MB | Formato: JPG o PNG</p>
+
+                </div>
+
+                <hr class="pb-2">
+
+                {{-- Area para el contenido del articulo --}}
+
+                <textarea name="contenido_articulo" class="form-control summernote-editar-articulo" required>{{$value->contenido_articulo}}</textarea>
+
+              </div>
+
+              {{-- Modal footer --}}
+              <div class="modal-footer d-flex justify-content-between">
+
+                <div>
+
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+                </div>
+
+                <div>
+
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+
+                </div>
+
+              </div>
+            
+            </form>
+
+            </div>
+
+          </div>
+
+        </div>
+          
+      @endforeach
+
+      <script>$("#editarArticulo").modal()</script>
+      
+    @endif
+      
+  @endif
+
   @if (Session::has("ok-crear"))
 
     <script>
@@ -281,6 +480,14 @@
 
     <script>
       notie.alert({ type: 3, text: '¡Error en el gestor de artículos!, time: 10'})
+    </script>
+      
+  @endif
+
+  @if (Session::has("ok-editar"))
+
+    <script>
+      notie.alert({ type: 1, text: '¡El artículo ha sido ceditado correctamente!, time: 10'})
     </script>
       
   @endif
