@@ -93,7 +93,7 @@ Class ControladorBlog{
                     CREACIÓN DEL DIRECTORIO EN DONDE SE VA A GUARDAR LA FOTO DEL USUARIO
                     ===============================================*/
 
-                    $directorio = "vistas/img/usuarios/";
+                    $directorio = "cms/public/vistas/img/usuarios/";
 
                     /*===============================================
                     DE ACUERDO AL TIPO DE IMAGEN SE APLIACAN LAS FUNCIONES POR DEFECTO DE PHP
@@ -145,6 +145,8 @@ Class ControladorBlog{
                 
                 $tabla = "opiniones";
 
+                //$rutaReducida = substr($ruta, 0, 4);
+
                 $datos = array("id_art" => $_POST["id_art"],
                                 "nombre_opinion" => $_POST["nombre_opinion"],
                                 "correo_opinion" => $_POST["correo_opinion"],
@@ -153,6 +155,9 @@ Class ControladorBlog{
                                 "fecha_opinion" => date('Y-m-d'),
                                 "id_adm" => 1
                             );
+                // echo '<pre>'; print_r($datos); echo '</pre>';
+                
+                // return;
 
                 $respuesta = ModeloBlog::mdlEnviarOpinion($tabla, $datos);
 

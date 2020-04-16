@@ -239,7 +239,7 @@ CONTENIDO ARTÍCULO
 
 								<div class="col-3 col-sm-4 col-lg-2 p-2">
 							
-									<img src="<?php echo $blog["servidor"].$value["foto_opinion"];?>" class="img-thumbnail">	
+									<img src="<?php echo $blog["servidor"].substr($value["foto_opinion"], 11);?>" class="img-thumbnail">	
 
 								</div>
 

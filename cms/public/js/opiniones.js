@@ -17,16 +17,16 @@ DataTable Servidor de administradores
 // })
 
 /*=======================================
-DataTables de administradores
+DataTables de opiniones
 =======================================*/
 
-var tablaAdministradores = $("#tablaAdministradores").DataTable({
+var tablaOpiniones = $("#tablaOpiniones").DataTable({
 
     processing: true,
     serverSide: true,
 
     ajax:{
-        url: ruta+"/administradores"
+        url: ruta+"/opiniones"
     },
 
     "columnDefs":[{
@@ -41,31 +41,27 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
     columns: [
         {
-            data: 'id',
-            name: 'id'
+            data: 'id_opinion',
+            name: 'id_opinion'
         },
         {
-            data: 'name',
-            name: 'name'
+            data: 'titulo_articulo',
+            name: 'titulo_articulo'
         },
         {
-            data: 'email',
-            name: 'email'
+            data: 'nombre_opinion',
+            name: 'nombre_opinion'
         },
         {
-            data: 'foto',
-            name: 'foto',
+            data: 'correo_opinion',
+            name: 'correo_opinion'
+        },
+        {
+            data: 'foto_opinion',
+            name: 'foto_opinion',
             render: function(data, type, full, meta){
 
-                if(data == null){
-
-                    return '<img src="'+ruta+'/img/administradores/admin.png" class="img-fluid rounded-circle">'
-
-                }else{
-
-                    return '<img src="'+ruta+'/'+data+'" class="img-fluid rounded-circle">'
-
-                }
+                return '<img src="'+ruta+'/'+data.slice(11)+'" class="img-fluid rounded-circle">'
 
             },
 
@@ -73,24 +69,28 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
         },
         {
-            data: 'rol',
-            name: 'rol',
-            render: function(data, type, full, meta){
-
-                if(data == null){
-
-                    return 'administrador'
-
-                }else{
-
-                    return data
-
-                }
-
-            },
-
-            orderable: true
-
+            data: 'contenido_opinion',
+            name: 'contenido_opinion'
+        },
+        {
+            data: 'fecha_opinion',
+            name: 'fecha_opinion'
+        },
+        {
+            data: 'aprobacion_opinion',
+            name: 'aprobacion_opinion'
+        },
+        {
+            data: 'name',
+            name: 'name'
+        },
+        {
+            data: 'respuesta_opinion',
+            name: 'respuesta_opinion'
+        },
+        {
+            data: 'fecha_respuesta',
+            name: 'fecha_respuesta'
         },
         {
             data: 'acciones',
@@ -125,8 +125,8 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
 });
 
-tablaAdministradores.on('order.dt search.dt', function(){
+tablaOpiniones.on('order.dt search.dt', function(){
 
-    tablaAdministradores.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+    tablaOpiniones.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
 
 }).draw();

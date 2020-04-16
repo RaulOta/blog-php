@@ -50,8 +50,6 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">Title</h3>
-
                 <div class="card-tools">
 
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -68,9 +66,35 @@
 
               <div class="card-body">
 
-                @foreach ($opiniones as $element)
+                <table class="table table-bored table-striped dt-responsive" id="tablaOpiniones" width="100%">
+                  
+                  <thead>
+
+                    <tr>
+
+                      <th width="10px">#</th>
+                      <th>Artículo</th>
+                      <th>Nombre</th>
+                      <th>Correo</th>
+                      <th width="200px">Foto</th>
+                      <th width="700px">Opinión</th>
+                      <th>Fecha Opinión</th>
+                      <th>Aprobación</th>
+                      <th>Administrador</th>
+                      <th>Respuesta</th>
+                      <th>Fecha Respuesta</th>
+                      <th>Acciones</th>
+
+                    </tr>
+
+                  </thead>
+
+                </table>
+
+                {{-- @foreach ($opiniones as $element)
                     {{ $element }}
-                @endforeach
+                @endforeach --}}
+
 
               </div>
               <!-- /.card-body -->
