@@ -171,4 +171,34 @@ class OpinionesController extends Controller
         }
 
     }
+
+    /*==============================================
+    Eliminar una Opinón
+    ==============================================*/
+
+    public function destroy($id, Request $request){
+
+        $validar = Opiniones::where("id_opinion", $id)->get();
+
+        if(!empty($validar)){
+
+            if($validar[0]["foto_opinion"] != "cms/public/vistas/img/usuarios/default.png"){
+
+                $rutaNueva = substr($validar[0]["foto_opinion"], 11);
+
+                unlink($rutaNueva);
+
+            }
+
+            $opinion = Opiniones::where("id_opinion", $validar[0]["id_opinion"])->delete();
+
+            return "ok";
+
+        }else{
+
+            return redirect("/opiniones")->with("no-borrar", "");
+
+        }
+
+    }
 }

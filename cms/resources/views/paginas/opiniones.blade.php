@@ -386,5 +386,21 @@
     </script>
       
   @endif
+
+  @if (Session::has("error"))
+
+    <script>
+      notie.alert({ type: 3, text: '¡Error en el gestor de opiniones!, time: 10'})
+    </script>
+      
+  @endif
+
+  @if (Session::has("no-borrar"))
+
+    <script>
+      notie.alert({ type: 3, text: '¡Error, no se borro la opinión!, time: 10'})
+    </script>
+      
+  @endif
   
 @endsection

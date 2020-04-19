@@ -398,6 +398,7 @@ $(document).on("click", ".eliminarRegistro", function(){
                 processData: false,
                 success: function(respuesta){
 
+                    //console.log(respuesta);
                     if(respuesta == "ok"){
 
                         swal({
