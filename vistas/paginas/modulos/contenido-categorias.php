@@ -168,7 +168,7 @@ CONTENIDO CATEGORIA
 							
 							<a href="<?php echo $blog["dominio"].$categoria[0]["ruta_categoria"]."/".$value["ruta_articulo"]; ?>">
 
-								<img src="<?php echo $blog["dominio"].$value["portada_articulo"];?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
+								<img src="<?php echo $blog["servidor"].$value["portada_articulo"];?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
 
 							</a>
 

@@ -410,7 +410,7 @@ CONTENIDO ARTÍCULO
 
 			</div>
 
-			<!-- COLUMNA DERECHA -->
+			<!-- COLUMNA DERECHA --> 
 
 			<div class="d-none d-md-block pt-md-4 pt-lg-0 col-md-4 col-lg-3">		
 
