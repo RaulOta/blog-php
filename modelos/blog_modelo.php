@@ -120,7 +120,7 @@ Class ModeloBlog{
     static public function mdlMostrarOpiniones($tabla1, $tabla2, $item, $valor){
 
         $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.* FROM $tabla1 INNER JOIN 
-        $tabla2 ON $tabla1.id_adm = $tabla2.id_admin WHERE $item = :$item");
+        $tabla2 ON $tabla1.id_adm = $tabla2.id WHERE $item = :$item");
 
         $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
