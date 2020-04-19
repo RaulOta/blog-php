@@ -487,7 +487,7 @@
   @if (Session::has("ok-editar"))
 
     <script>
-      notie.alert({ type: 1, text: '¡El artículo ha sido ceditado correctamente!, time: 10'})
+      notie.alert({ type: 1, text: '¡El artículo ha sido editado correctamente!, time: 10'})
     </script>
       
   @endif
