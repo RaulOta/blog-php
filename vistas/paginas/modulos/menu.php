@@ -24,12 +24,14 @@ MENU
 
 		<?php endforeach ?>
 
-		<?php foreach(array_unique($listaCategorias) as $key => $value): ?>
-			<li class="nav-item">
+		<?php foreach(array_values(array_unique($listaCategorias)) as $key => $value): ?>
 
-				<a class="nav-link text-white" href="<?php echo $blog["dominio"].$categorias[$key]; ?>"><?php echo $categorias[$key]["descripcion_categoria"]; ?></a>
+			<li class="nav-item">
+			
+				<a class="nav-link text-white" href="<?php echo $blog["dominio"].$categorias[$key]["ruta_categoria"]; ?>"><?php echo $categorias[$key]["descripcion_categoria"]; ?></a>
 
 			</li>
+
 		<?php endforeach ?>
 
 	</ul>
