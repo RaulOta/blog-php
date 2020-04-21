@@ -68,10 +68,25 @@ class BannerController extends Controller
 
         if(!empty($datos)){
 
-            $validar = \Validator::make($datos, [
+            if($datos["titulo_banner"] != "" && $datos["descripcion_banner"] != ""){
 
-                "titulo_banner" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                "descripcion_banner" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                $validarNulos = \Validator::make($datos, [
+
+                    "titulo_banner" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                    "descripcion_banner" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+    
+                ]);
+
+                if($validarNulos->fails()){
+            
+                    return redirect("/banner")->with("no-validacion", "");
+    
+                }
+
+            }
+
+            $validarImg = \Validator::make($datos, [
+
                 "imagen_temporal" =>  'required|image|mimes:jpg,jpeg,png|max:2000000'
 
             ]);
@@ -86,7 +101,7 @@ class BannerController extends Controller
 
             // Guardar banner
 
-            if(!$datos["imagen_temporal"] || $validar->fails()){
+            if(!$datos["imagen_temporal"] || $validarImg->fails()){
             
                 return redirect("/banner")->with("no-validacion", "");
 
@@ -97,7 +112,6 @@ class BannerController extends Controller
                 $aleatorio = mt_rand(100,999);
 
                 $ruta = "img/banner/".$aleatorio.".".$datos["imagen_temporal"]->guessExtension();
-                // $ruta = "img/categorias/".$aleatorio.".".$datos["imagen_temporal"]->guessExtension();
 
                 // Redimensionar imágen
 

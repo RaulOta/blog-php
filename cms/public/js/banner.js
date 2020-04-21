@@ -109,3 +109,30 @@ tablaBanner.on('order.dt search.dt', function(){
     tablaBanner.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
 
 }).draw();
+
+$(document).on("change", ".selectPagina", function(){
+
+    var pagina = $(this).val();
+
+    switch(pagina){
+
+        case "inicio":
+            $(".titulo_banner").prop("disabled", true);
+            $(".descripcion_banner").prop("disabled", true);
+            $(".titulo_banner").prop("required", false);
+            $(".descripcion_banner").prop("required", false);
+            console.log('dio click a ', pagina);
+        break;
+
+        case "interno":
+            $(".titulo_banner").prop("disabled", false);
+            $(".descripcion_banner").prop("disabled", false);
+            console.log('dio click a ', pagina);
+        break;
+
+        default:
+            $(".titulo_banner").prop("disabled", true);
+            $(".descripcion_banner").prop("disabled", true);
+            console.log('dio click a ');
+    }
+})

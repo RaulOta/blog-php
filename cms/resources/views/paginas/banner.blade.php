@@ -152,25 +152,23 @@
                 <i class="fas fa-list-ul"></i>
               </div>
 
-              <select class="form-control" name="pagina_banner" required>
+              <select class="form-control selectPagina" name="pagina_banner" required>
 
                 <option value="">Elige página</option>
 
                 @php
-                  $anterior = "";
+                  $listaBanner = array();
                 @endphp
 
                 @foreach ($banner as $key => $value)
 
-                  @if ($value->pagina_banner != $anterior)
-                  
-                    @php
-                      $anterior = $value->pagina_banner;  
-                    @endphp
+                  <?php array_push($listaBanner, $value->pagina_banner); ?>
 
-                    <option value="{{$value->pagina_banner}}">{{$value->pagina_banner}}</option>
+                @endforeach
 
-                  @endif
+                @foreach (array_values(array_unique($listaBanner)) as $key => $value)
+
+                  <option value="{{$value}}">{{$value}}</option>
                     
                 @endforeach
 
@@ -186,7 +184,7 @@
                 <i class="fas fa-list-ul"></i>
               </div>
 
-              <input type="text" class="form-control" name="titulo_banner" placeholder="Título del banner" required>
+              <input type="text" class="form-control titulo_banner" name="titulo_banner" placeholder="Título del banner" disabled required>
 
             </div>
 
@@ -198,7 +196,7 @@
                 <i class="fas fa-pencil-alt"></i>
               </div>
 
-              <input type="text" class="form-control" name="descripcion_banner" placeholder="Descripción del banner" required>
+              <input type="text" class="form-control descripcion_banner" name="descripcion_banner" placeholder="Descripción del banner" disabled required>
 
             </div>
 
@@ -218,7 +216,7 @@
 
               <img class="previsualizarImg_img_banner img-fluid py-2">
 
-              <p class="help-block small">Dimensiones: 680px * 400px | Peso Max. 2MB | Formato: JPG o PNG</p>
+              <p class="help-block small">Dimensiones: 1400px * 450px | Peso Max. 2MB | Formato: JPG o PNG</p>
 
 
 
