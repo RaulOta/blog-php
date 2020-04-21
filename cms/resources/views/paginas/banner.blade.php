@@ -218,17 +218,25 @@
 
               <p class="help-block small">Dimensiones: 1400px * 450px | Peso Max. 2MB | Formato: JPG o PNG</p>
 
-
-
             </div>
 
           </div>
 
           {{-- Footer Modal --}}
 
-          <div class="modal-footer">
+          <div class="modal-footer d-flex justify-content-between">
 
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <div>
+
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+            </div>
+
+            <div>
+
+              <button type="submit" class="btn btn-primary">Guardar</button>
+
+            </div>
 
           </div>
 
