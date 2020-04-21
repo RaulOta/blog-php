@@ -17,16 +17,16 @@ DataTable Servidor de administradores
 // })
 
 /*=======================================
-DataTables de administradores
+DataTables de Banners
 =======================================*/
 
-var tablaAdministradores = $("#tablaAdministradores").DataTable({
+var tablaBanner = $("#tablaBanner").DataTable({
 
     processing: true,
     serverSide: true,
 
     ajax:{
-        url: ruta+"/administradores"
+        url: ruta+"/banner"
     },
 
     "columnDefs":[{
@@ -41,56 +41,35 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
     columns: [
         {
-            data: 'id',
-            name: 'id'
+            data: 'id_banner',
+            name: 'id_banner'
         },
         {
-            data: 'name',
-            name: 'name'
+            data: 'pagina_banner',
+            name: 'pagina_banner'
         },
         {
-            data: 'email',
-            name: 'email'
+            data: 'titulo_banner',
+            name: 'titulo_banner'
         },
         {
-            data: 'foto',
-            name: 'foto',
+            data: 'descripcion_banner',
+            name: 'descripcion_banner'
+        },
+        {
+            data: 'img_banner',
+            name: 'img_banner',
             render: function(data, type, full, meta){
 
-                if(data == null){
-
-                    return '<img src="'+ruta+'/img/administradores/admin.png" class="img-fluid rounded-circle">'
-
-                }else{
-
-                    return '<img src="'+ruta+'/'+data+'" class="img-fluid rounded-circle">'
-
-                }
+                return '<img src="'+ruta+'/'+data+'" class="img-fluid">'
 
             },
-
             orderable: false
 
         },
         {
-            data: 'rol',
-            name: 'rol',
-            render: function(data, type, full, meta){
-
-                if(data == null){
-
-                    return 'administrador'
-
-                }else{
-
-                    return data
-
-                }
-
-            },
-
-            orderable: true
-
+            data: 'fecha_banner',
+            name: 'fecha_banner',
         },
         {
             data: 'acciones',
@@ -125,8 +104,8 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
 });
 
-tablaAdministradores.on('order.dt search.dt', function(){
+tablaBanner.on('order.dt search.dt', function(){
 
-    tablaAdministradores.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+    tablaBanner.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
 
 }).draw();
