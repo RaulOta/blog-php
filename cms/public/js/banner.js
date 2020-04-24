@@ -110,6 +110,10 @@ tablaBanner.on('order.dt search.dt', function(){
 
 }).draw();
 
+/*==============================================
+Validar datos para Seleccionar la página del banner
+==============================================*/
+
 $(document).on("change", ".selectPagina", function(){
 
     var pagina = $(this).val();
@@ -121,18 +125,18 @@ $(document).on("change", ".selectPagina", function(){
             $(".descripcion_banner").prop("disabled", true);
             $(".titulo_banner").prop("required", false);
             $(".descripcion_banner").prop("required", false);
-            console.log('dio click a ', pagina);
         break;
 
         case "interno":
             $(".titulo_banner").prop("disabled", false);
             $(".descripcion_banner").prop("disabled", false);
-            console.log('dio click a ', pagina);
+            $(".titulo_banner").prop("required", true);
+            $(".descripcion_banner").prop("required", true);
         break;
 
         default:
             $(".titulo_banner").prop("disabled", true);
             $(".descripcion_banner").prop("disabled", true);
-            console.log('dio click a ');
+
     }
 })

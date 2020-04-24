@@ -160,15 +160,15 @@
                   $listaBanner = array();
                 @endphp
 
-                @foreach ($banner as $key => $value)
+                @foreach ($banners as $key => $value)
 
                   <?php array_push($listaBanner, $value->pagina_banner); ?>
 
                 @endforeach
 
-                @foreach (array_values(array_unique($listaBanner)) as $key => $value)
+                @foreach (array_values(array_unique($listaBanner)) as $key => $value2)
 
-                  <option value="{{$value}}">{{$value}}</option>
+                  <option value="{{$value2}}">{{$value2}}</option>
                     
                 @endforeach
 
@@ -248,6 +248,185 @@
 
   </div>
 
+  <!--==================================================
+  Editar registro (Banner)
+  ===================================================-->
+
+  @if (isset($status))
+    
+    @if ($status == 200)
+
+      @foreach ($banner as $key => $value)
+
+        <div class="modal" id="editarBanner">
+
+          <div class="modal-dialog modal-sm">
+      
+            <div class="modal-content">
+      
+              <form action="{{url('/')}}/banner/{{$value->id_banner}}" method="POST" enctype="multipart/form-data">
+      
+                @method('PUT')
+
+                @csrf
+      
+                <div class="modal-header bg-info">
+      
+                  <h4 class="modal-title">Editar</h4>
+      
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+      
+                </div>
+      
+                <div class="modal-body">
+
+                  {{-- Página del banner --}}
+                  <div class="input-group mb-3">
+
+                    <div class="input-group-append input-group-text">
+                      <i class="fas fa-list-ul"></i>
+                    </div>
+
+                    <select class="form-control selectPagina" name="pagina_banner">
+                      
+                      <option value="{{$value->pagina_banner}}">{{$value->pagina_banner}}</option>
+
+                      @php
+                          $listaBanner = array();
+                      @endphp
+                      
+                      @foreach ($banners as $key => $value2)
+                    
+                        @php
+                            array_push($listaBanner, $value2->pagina_banner);
+                        @endphp
+
+                      @endforeach
+
+                      @foreach (array_values(array_unique($listaBanner)) as $key => $value2)
+                      
+                        @if ($value2 != $value->pagina_banner)
+
+                          <option value="{{$value2}}">{{$value2}}</option>
+                            
+                        @endif
+                      
+                      @endforeach
+
+                    </select>
+
+                  </div>
+
+                  @if ($value->pagina_banner == "inicio")
+
+                    {{-- Título del banner --}}
+
+                    <div class="input-group mb-3">
+
+                      <div class="input-group-append input-group-text">
+                        <i class="fas fa-list-ul"></i>
+                      </div>
+
+                      <input type="text" class="form-control titulo_banner" name="titulo_banner" placeholder="Título del banner" value="{{$value->titulo_banner}}" disabled>
+
+                    </div>
+
+                    {{-- Descripción del banner --}}
+
+                    <div class="input-group mb-3">
+
+                      <div class="input-group-append input-group-text">
+                        <i class="fas fa-list-ul"></i>
+                      </div>
+
+                      <input type="text" class="form-control descripcion_banner" name="descripcion_banner" placeholder="Descripción de banner" value="{{$value->descripcion_banner}}" disabled>
+
+                    </div>
+
+                    @else
+
+                      {{-- Título del banner --}}
+
+                      <div class="input-group mb-3">
+
+                        <div class="input-group-append input-group-text">
+                          <i class="fas fa-list-ul"></i>
+                        </div>
+
+                        <input type="text" class="form-control titulo_banner" name="titulo_banner" placeholder="Título del banner" value="{{$value->titulo_banner}}" required>
+
+                      </div>
+
+                      {{-- Descripción del banner --}}
+
+                      <div class="input-group mb-3">
+
+                        <div class="input-group-append input-group-text">
+                          <i class="fas fa-list-ul"></i>
+                        </div>
+
+                        <input type="text" class="form-control descripcion_banner" name="descripcion_banner" placeholder="Descripción de banner" value="{{$value->descripcion_banner}}" required>
+
+                      </div>
+                      
+                  @endif
+
+                 
+
+                  {{-- Imágen del banner --}}
+
+                  <div class="form-group my-2 text-center">
+
+                    <div class="btn btn-default btn-file">
+
+                      <i class="fas fa-paperclip"></i> Adjuntar imágen del artículo
+
+                      <input type="file" name="img_banner">
+
+                    </div>
+
+                    <img src="{{url('')}}/{{$value->img_banner}}" class="previsualizarImg_img_banner img-fluid py-2">
+
+                    <input type="hidden" value="{{$value->img_banner}}" name="imagen_actual">
+
+                    <p class="help-block small">Dimensiones: 1400px * 450px | Peso Max. 2MB | Formato: JPG o PNG</p>
+
+                  </div>
+
+                </div>
+      
+                <div class="modal-footer d-flex justify-content-between">
+
+                  <div>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+                  </div>
+
+                  <div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+
+                  </div>
+
+                </div>
+      
+              </form>
+      
+            </div>
+      
+          </div>
+      
+        </div>
+          
+      @endforeach
+
+      <script> $("#editarBanner").modal(); </script>
+        
+    @endif
+      
+  @endif
+
   @if (Session::has("ok-crear"))
 
     <script>
@@ -270,6 +449,14 @@
       notie.alert({ type: 3, text: '¡Error en el gestor banner!, time: 10'})
     </script>
       
+  @endif
+
+  @if (Session::has("ok-editar"))
+
+  <script>
+    notie.alert({ type: 1, text: '¡El banner ha sido editado correctamente!, time: 10'})
+  </script>
+  
   @endif
   
 @endsection

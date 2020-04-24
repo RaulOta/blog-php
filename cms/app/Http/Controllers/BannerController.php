@@ -44,9 +44,9 @@ class BannerController extends Controller
         // $banner = Banner::all();
         $blog = Blog::all();
         $administradores = Administradores::all();
-        $banner = Banner::all();
+        $banners = Banner::all();
 
-        return view("paginas.banner", array("blog"=>$blog, "administradores"=>$administradores, "banner"=>$banner));
+        return view("paginas.banner", array("blog"=>$blog, "administradores"=>$administradores, "banners"=>$banners));
 
     }
 
@@ -157,7 +157,151 @@ class BannerController extends Controller
             return redirect("/banner")->with("error", "");
 
         }
+
+    }
+
+    /*==============================================
+    Mostrar un solo registro
+    ==============================================*/
+
+    public function show($id){
+
+        $banner = Banner::where('id_banner', $id)->get();
+        $banners = Banner::all();
+        $blog = Blog::all();
+        $administradores = Administradores::all();
         
+        if(count($banner) != 0 ){
+
+            return view("paginas.banner", array("status"=>200, "banner"=>$banner, "blog"=>$blog, "administradores"=>$administradores, "banners"=>$banners));
+
+        }else{
+
+            return view("paginas.banner", array("status"=>404, "blog"=>$blog, "administradores"=>$administradores));
+
+        }
+
+    }
+
+    /*==============================================
+    Editar un registro
+    ==============================================*/
+
+    public function update($id, Request $request){
+
+        // Recoger los datos de la vista
+
+        $datos = array("pagina_banner"=>$request->input("pagina_banner"),
+                       "titulo_banner"=>$request->input("titulo_banner"),
+                       "descripcion_banner"=>$request->input("descripcion_banner"),
+                       "imagen_actual"=>$request->input("imagen_actual")
+                    );
+
+        // Recoger imágen de la vista
+
+        $imagen = array("imagen_temporal"=>$request->file("img_banner"));
+
+        // Validar los datos
+
+        if(!empty($datos)){
+
+            if($datos["pagina_banner"] != ("inicio" && "interno")){
+
+                return redirect("/banner")->with("no-validacion", "");
+
+            }
+
+            if(($datos["titulo_banner"] && $datos["descripcion_banner"]) != ""){
+
+                $validarInterno = \Validator::make($datos, [
+
+                    "titulo_banner" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                    "descripcion_banner" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+
+                ]);
+
+                if($validarInterno->fails()){
+
+                    return redirect("/banner")->with("no-validacion", "");
+
+                }
+
+            }
+            
+            if($imagen["imagen_temporal"] != ""){
+
+                $validarImagen = \Validator::make($imagen, [
+
+                    "imagen_temporal"=>"required|image|mimes:jpg,jpeg,png|max:2000000"
+    
+                ]);
+
+                if($validarImagen->fails()){
+
+                    return redirect("/banner")->with("no-validacion");
+
+                }
+
+            }
+
+            $ruta = "";
+
+            if($imagen["imagen_temporal"] != ""){
+
+                unlink($datos["imagen_actual"]);
+
+                $aleatorio = mt_rand(100,999);
+
+                $ruta = "img/banner/".$aleatorio.".".$imagen["imagen_temporal"]->guessExtension();
+
+                // Redimesionar imágen
+
+                list($ancho, $alto) = getimagesize($imagen["imagen_temporal"]);
+
+                $nuevoAncho = 1400; 
+                $nuevoAlto = 450;
+
+                if($imagen["imagen_temporal"]->guessExtension() == "jpeg"){
+
+                    $origen = imagecreatefromjpeg($imagen["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagejpeg($destino, $ruta);
+
+                }
+
+                if($imagen["imagen_temporal"]->guessExtension()== "png"){
+
+                    $origen = imagecreatefrompng($imagen["imagen_temporal"]);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    imagealphablending($destino, FALSE);
+                    imagesavealpha($destino, TRUE);
+                    imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                    imagepng($destino, $ruta);
+
+                }
+
+            }else{
+
+                $ruta = $datos["imagen_actual"];
+
+            }
+
+            $datos = array("pagina_banner" => $datos["pagina_banner"],
+                           "titulo_banner" => $datos["titulo_banner"],
+                           "descripcion_banner" => $datos["descripcion_banner"],
+                           "img_banner" => $ruta
+                    );
+
+            $banner = Banner::where('id_banner', $id)->update($datos);
+
+            return redirect("/banner")->with("ok-editar", "");
+
+        }else{
+
+            return redirect("/banner")->with("error", "");
+
+        }
 
     }
 }
