@@ -113,7 +113,8 @@
             <script src="{{ url('/') }}/js/categorias.js"></script>
             <script src="{{ url('/') }}/js/articulos.js"></script>
             <script src="{{ url('/')}}/js/opiniones.js"></script>
-            <SCRipt src="{{ url('/')}}/js/banner.js"></SCRipt>
+            <script src="{{ url('/')}}/js/banner.js"></SCRipt>
+            <script src="{{ url('/')}}/js/anuncios.js"></script>
             
         </body>
 

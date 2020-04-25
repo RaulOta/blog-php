@@ -17,16 +17,16 @@ DataTable Servidor de administradores
 // })
 
 /*=======================================
-DataTables de administradores
+DataTables de anuncios
 =======================================*/
 
-var tablaAdministradores = $("#tablaAdministradores").DataTable({
+var tablaAnuncios = $("#tablaAnuncios").DataTable({
 
     processing: true,
     serverSide: true,
 
     ajax:{
-        url: ruta+"/administradores"
+        url: ruta+"/anuncios"
     },
 
     "columnDefs":[{
@@ -41,55 +41,20 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
     columns: [
         {
-            data: 'id',
-            name: 'id'
+            data: 'id_anuncio',
+            name: 'id_anuncio'
         },
         {
-            data: 'name',
-            name: 'name'
+            data: 'pagina_anuncio',
+            name: 'pagina_anuncio'
         },
         {
-            data: 'email',
-            name: 'email'
+            data: 'cont_anuncio',
+            name: 'cont_anuncio'
         },
         {
-            data: 'foto',
-            name: 'foto',
-            render: function(data, type, full, meta){
-
-                if(data == null){
-
-                    return '<img src="'+ruta+'/img/administradores/admin.png" class="img-fluid rounded-circle">'
-
-                }else{
-
-                    return '<img src="'+ruta+'/'+data+'" class="img-fluid rounded-circle">'
-
-                }
-
-            },
-
-            orderable: false
-
-        },
-        {
-            data: 'rol',
-            name: 'rol',
-            render: function(data, type, full, meta){
-
-                if(data == null){
-
-                    return 'administrador'
-
-                }else{
-
-                    return data
-
-                }
-
-            },
-
-            orderable: true
+            data: 'fecha_anuncio',
+            name: 'fecha_anuncio'
 
         },
         {
@@ -125,8 +90,8 @@ var tablaAdministradores = $("#tablaAdministradores").DataTable({
 
 });
 
-tablaAdministradores.on('order.dt search.dt', function(){
+tablaAnuncios.on('order.dt search.dt', function(){
 
-    tablaAdministradores.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+    tablaAnuncios.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
 
 }).draw();

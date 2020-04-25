@@ -50,7 +50,7 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">Title</h3>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#crearAnuncio">Crear nuevo anuncio</button>
 
                 <div class="card-tools">
 
@@ -68,9 +68,27 @@
 
               <div class="card-body">
 
-                @foreach ($anuncios as $element)
+                <table class="table table-bored table-striped dt-responsive" id="tablaAnuncios" width="100%">
+
+                  <thead>
+
+                    <tr>
+
+                      <th width="10px">#</th>
+                      <th>Página</th>
+                      <th>Anuncio</th>
+                      <th>Última modificación</th>
+                      <th>Acciones</th>
+
+                    </tr>
+
+                  </thead>
+
+                </table>
+
+                {{-- @foreach ($anuncios as $element)
                     {{ $element }}
-                @endforeach
+                @endforeach --}}
 
               </div>
               <!-- /.card-body -->
