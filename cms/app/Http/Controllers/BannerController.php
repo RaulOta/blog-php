@@ -304,4 +304,32 @@ class BannerController extends Controller
         }
 
     }
+
+    /*==============================================
+    Eliminar registro
+    ==============================================*/
+
+    public function destroy($id, Request $request){
+
+        $validar = Banner::where("id_banner", $id)->get();
+
+        if(!empty($validar)){
+
+            if(!empty($validar[0]["img_banner"])){
+
+                unlink($validar[0]["img_banner"]);
+
+            }
+
+            $banner = Banner::where("id_banner", $validar[0]["id_banner"])->delete();
+
+            return "ok";
+
+        }else{
+
+            return redirect("/banner")->with("no-borrar", "");
+
+        }
+
+    }
 }

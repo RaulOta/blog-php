@@ -458,5 +458,13 @@
   </script>
   
   @endif
+
+  @if (Session::has("no-borrar"))
+
+  <script>
+    notie.alert({ type: 3, text: '¡El banner ha sido borrado correctamente!, time: 10'})
+  </script>
+  
+  @endif
   
 @endsection
