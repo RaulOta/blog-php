@@ -245,6 +245,24 @@ $(".summernote-anuncios").summernote({
 
 });
 
+$(".summernote-editar-anuncios").summernote({
+
+    height: 300,
+    callbacks: {
+
+        onImageUpload: function(files){
+
+            for (var i = 0; i < files.length; i++) {
+                upload_editar_anuncios(files[i]);
+                
+            }
+
+        }
+
+    }
+
+});
+
 /*=======================================
 SUBIR IMÁGEN AL SERVIDOR
 =======================================*/
@@ -395,6 +413,38 @@ function upload_anuncios(file){
         success: function (respuesta){
 
             $('.summernote-anuncios').summernote("insertImage", respuesta, function ($image){
+
+                $image.attr('class', 'img-fluid');
+
+            });
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+    })
+
+}
+
+function upload_editar_anuncios(file){
+
+    var datos = new FormData();
+    datos.append('file', file, file.name);
+    datos.append("ruta", ruta);
+    datos.append("carpeta", "anuncios");
+
+    $.ajax({
+
+        url: ruta+"/ajax/upload.php",
+        method: "POST",
+        data: datos,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (respuesta){
+
+            $('.summernote-editar-anuncios').summernote("insertImage", respuesta, function ($image){
 
                 $image.attr('class', 'img-fluid');
 

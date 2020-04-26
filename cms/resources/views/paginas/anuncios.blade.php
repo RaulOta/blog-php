@@ -210,6 +210,121 @@
 
   </div>
 
+  <!--==================================================
+  Editar registro (anuncio)
+  ===================================================-->
+  @if (isset($status))
+
+    @if ($status == 200)
+
+      @foreach ($anuncio as $key => $value)
+
+        <div class="modal" id="editarAnuncio">
+
+          <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+              <form action="{{url('/')}}/anuncios/{{$value->id_anuncio}}" method="POST" enctype="multipart/form-data">
+              
+                @method('PUT')
+
+                @csrf
+
+                {{-- Header Modal --}}
+
+                <div class="modal-header bg-info">
+
+                  <h4>Editar anuncio</h4>
+
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                {{-- Body Modal --}}
+
+                <div class="modal-body">
+
+                  {{-- Página anuncio --}}
+
+                  <div class="input-group mb-3">
+
+                    <div class="input-group-append input-group-text">
+                      <i class="fas fa-list-ul"></i>
+                    </div>
+
+                    <select class="form-control" name="pagina_anuncio">
+
+                      <option value="{{$value->pagina_anuncio}}">{{$value->pagina_anuncio}}</option>
+
+                      @php
+                          
+                          $listaAnuncio = array();
+
+                          foreach ($anuncios as $key => $value2) {
+                            
+                            array_push($listaAnuncio, $value2->pagina_anuncio);
+
+                          }
+
+                      @endphp
+
+                      @foreach (array_values(array_unique($listaAnuncio)) as $key => $value2)
+                          
+                          @if ($value->pagina_anuncio != $value2)
+
+                            <option value="{{$value2}}">{{$value2}}</option>
+                              
+                          @endif
+
+                      @endforeach
+
+                    </select>
+
+                  </div>
+
+                  <hr class="pb-2">
+
+                  {{-- Código anuncio --}}
+
+                  <textarea name="codigo_anuncio" class="form-control summernote-editar-anuncios">{{$value->codigo_anuncio}}</textarea>
+
+                </div>
+
+                {{-- Footer Modal --}}
+
+                <div class="modal-footer d-flex justify-content-between">
+
+                  <div>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+                  </div>
+
+                  <div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+          
+      @endforeach
+
+      <script>$("#editarAnuncio").modal()</script>
+        
+    @endif
+      
+  @endif
+
   @if (Session::has("ok-crear"))
 
   <script>
@@ -232,6 +347,14 @@
       notie.alert({ type: 3, text: '¡Error en el gestor anuncios!', time: 10})
     </script>
       
+  @endif
+
+  @if (Session::has("ok-editar"))
+
+  <script>
+    notie.alert({ type: 1, text: '¡El anuncio ha sido editado correctamente!', time: 10})
+  </script>
+  
   @endif
   
 @endsection
