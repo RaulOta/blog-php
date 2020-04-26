@@ -265,4 +265,25 @@ class AnunciosController extends Controller
         }
 
     }
+
+    // Eliminar registro (anuncio)
+
+    public function destroy($id, Request $request){
+
+        $validar = Anuncios::where("id_anuncio", $id)->get();
+
+        if(!empty($validar)){
+
+            $anuncio = Anuncios::where("id_anuncio", $validar[0]["id_anuncio"])->delete();
+
+            return "ok";
+
+        }else{
+
+            return redirect("/anuncios")->with("no-borrar", "");
+
+        }
+
+    }
+
 }
