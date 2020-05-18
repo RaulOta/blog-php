@@ -1,2 +1,2 @@
 # blog-php
-Creación de Blog en PHP con curso de Udemy
+Creación de Blog del viajero en PHP y CMS blog del viajero con Laravel, con curso de Udemy
